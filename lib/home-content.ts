@@ -171,6 +171,11 @@ export const differentiation = {
   ],
 } as const;
 
+export const processSection = {
+  title: "Dal primo messaggio al lancio.",
+  body: "Un percorso chiaro, trasparente e collaborativo: dalla prima conversazione al go-live, e oltre.",
+} as const;
+
 export const processSteps = [
   {
     number: "01",
@@ -206,23 +211,57 @@ export const processSteps = [
 
 export const technologies = {
   title: "La tecnologia dietro i nostri progetti.",
-  stack: [
-    "NEXT.JS",
-    "REACT",
-    "NODE.JS",
-    "SHOPIFY",
-    "JAVASCRIPT",
-    "API",
-    "LINUX",
-  ] as const,
   body: "Utilizziamo tecnologie moderne per creare prodotti digitali veloci, scalabili e facilmente mantenibili.",
+  stack: [
+    "Next.js",
+    "Node.js",
+    "Shopify",
+    "Linux",
+    "Vercel",
+    "JavaScript",
+    "HTML",
+    "CSS",
+    "React",
+    "MySQL",
+  ] as const,
 } as const;
 
-export const testimonial = {
-  quote:
-    "Professionisti, disponibili e attenti ai dettagli. Hanno trasformato la nostra presenza online in uno strumento che porta contatti reali.",
-  name: "Cliente",
-  role: "PMI · Lombardia",
+export const testimonialsSection = {
+  label: "Testimonianze",
+  title: "Le parole dei nostri clienti.",
+  body: "Collaborazioni concrete, risultati misurabili e relazioni che continuano nel tempo.",
+  items: [
+    {
+      quote:
+        "Professionisti, disponibili e attenti ai dettagli. Hanno trasformato la nostra presenza online in uno strumento che porta contatti reali.",
+      name: "Marco R.",
+      role: "PMI · Lombardia",
+    },
+    {
+      quote:
+        "Dal primo incontro al go-live tutto è stato chiaro. Il sito riflette davvero il nostro brand e funziona benissimo anche da mobile.",
+      name: "Elena B.",
+      role: "Hospitality · Como",
+    },
+    {
+      quote:
+        "Volevamo un e-commerce semplice da gestire: l'abbiamo ottenuto, con un'esperienza di acquisto fluida e un supporto costante.",
+      name: "Giulia T.",
+      role: "Retail · Milano",
+    },
+    {
+      quote:
+        "Non solo design: ci hanno aiutato a capire obiettivi e priorità. Oggi riceviamo richieste più qualificate.",
+      name: "Andrea P.",
+      role: "Studio professionale · Como",
+    },
+    {
+      quote:
+        "Tempi rispettati, comunicazione trasparente e un risultato che ci rappresenta. Li consigliamo senza esitazione.",
+      name: "Sofia M.",
+      role: "Startup · Lombardia",
+    },
+  ],
 } as const;
 
 export const caseStudy = {

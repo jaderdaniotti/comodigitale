@@ -1,42 +1,58 @@
 "use client";
 
-import { Star } from "lucide-react";
+import LogoLoop, { type LogoItem } from "@/components/logo-loop";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
-import { testimonial } from "@/lib/home-content";
+import { useTheme } from "@/components/theme-provider";
+import { testimonialsSection } from "@/lib/home-content";
 
 export function TestimonialsSection() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+
+  const reviewLogos: LogoItem[] = testimonialsSection.items.map((item) => ({
+    title: item.name,
+    node: (
+      <figure className="flex w-[min(78vw,420px)] flex-col gap-4 text-left">
+        <blockquote className="font-display text-[clamp(1.15rem,2.4vw,1.55rem)] font-medium leading-snug tracking-tight text-foreground">
+          &ldquo;{item.quote}&rdquo;
+        </blockquote>
+        <figcaption>
+          <p className="text-sm font-semibold text-foreground">{item.name}</p>
+          <p className="mt-0.5 text-sm text-muted">{item.role}</p>
+        </figcaption>
+      </figure>
+    ),
+  }));
+
   return (
-    <section className="bg-background py-24 text-foreground lg:py-32">
+    <section className="bg-background py-20 text-foreground lg:py-28">
       <div className="page-shell">
-        <Reveal>
-          <SectionLabel>Testimonianze</SectionLabel>
-          <h2 className="font-display text-[clamp(2rem,4vw,2.8rem)] font-semibold tracking-tight">
-            Le parole dei nostri clienti.
+        <Reveal className="mx-auto max-w-5xl text-center">
+          <SectionLabel className="justify-center">
+            {testimonialsSection.label}
+          </SectionLabel>
+          <h2 className="font-display text-[clamp(2.4rem,6vw,4.5rem)] font-semibold leading-[1.02] tracking-tight">
+            {testimonialsSection.title}
           </h2>
+          <p className="mx-auto mt-8 max-w-3xl text-[clamp(1.05rem,2.2vw,1.35rem)] leading-relaxed text-muted">
+            {testimonialsSection.body}
+          </p>
         </Reveal>
+      </div>
 
-        <Reveal delay={0.18} className="mt-12 max-w-4xl">
-          <blockquote>
-            <p className="text-[clamp(1.25rem,3vw,2rem)] font-medium leading-snug tracking-tight">
-              &ldquo;{testimonial.quote}&rdquo;
-            </p>
-            <footer className="mt-8">
-              <p className="font-display font-semibold">{testimonial.name}</p>
-              <p className="mt-1 text-sm text-muted">{testimonial.role}</p>
-            </footer>
-          </blockquote>
-
-          <div className="mt-10 flex gap-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="flex gap-0.5 text-foreground">
-                {Array.from({ length: 5 }).map((_, j) => (
-                  <Star key={j} className="h-4 w-4 fill-current" />
-                ))}
-              </div>
-            ))}
-          </div>
-        </Reveal>
+      <div className="relative mt-14 overflow-hidden py-4 lg:mt-16">
+        <LogoLoop
+          logos={reviewLogos}
+          speed={45}
+          direction="left"
+          logoHeight={28}
+          gap={80}
+          hoverSpeed={12}
+          fadeOut
+          fadeOutColor={isDark ? "#0A0C00" : "#F6F5F3"}
+          ariaLabel="Recensioni clienti"
+        />
       </div>
     </section>
   );

@@ -1,20 +1,22 @@
 "use client";
 
-import ScrollStack, { ScrollStackItem } from "@/components/scroll-stack";
+import { motion } from "framer-motion";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import { useTheme } from "@/components/theme-provider";
 import { differentiation } from "@/lib/home-content";
 import { cn } from "@/lib/cn";
 
+const STICKY_TOP = "6rem";
+
 export function DifferentiationSection() {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
   return (
-    <section className="bg-background text-foreground">
-      <div className="page-shell pt-20 lg:pt-28">
-        <Reveal className="mx-auto max-w-4xl text-center">
+    <section className="bg-background py-20 text-foreground lg:py-28">
+      <div className="page-shell">
+        <Reveal className="mx-auto max-w-5xl text-center">
           <SectionLabel className="justify-center">Perché noi</SectionLabel>
           <h2 className="font-display text-[clamp(2.4rem,6vw,4.5rem)] font-semibold leading-[1.02] tracking-tight">
             {differentiation.title}
@@ -23,51 +25,67 @@ export function DifferentiationSection() {
             {differentiation.body}
           </p>
         </Reveal>
-      </div>
 
-      {/* Contained height required: ScrollStack uses its own Lenis scroller (h-full). */}
-      <div className="page-shell h-[100svh]">
-        <ScrollStack className="mx-auto max-w-4xl">
-          {differentiation.points.map((point) => (
-            <ScrollStackItem
-              key={point.title}
-              itemClassName={cn(
-                "flex flex-col justify-center gap-4 border border-border shadow-none",
-                isDark
-                  ? "bg-cream/[0.08] text-cream"
-                  : "bg-ink/[0.05] text-ink",
-              )}
-            >
-              <div className="flex items-center gap-3 sm:gap-4">
-                <span
-                  aria-hidden
-                  className={cn(
-                    "inline-flex size-12 shrink-0 items-center justify-center rounded-full sm:size-14",
-                    isDark ? "bg-cream" : "bg-ink",
-                  )}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element -- emoji-style icon */}
-                  <img
-                    src={point.icon}
-                    alt=""
-                    className="size-8 object-contain sm:size-9"
-                  />
-                </span>
-                <h3 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-none tracking-tight">
-                  {point.title}
-                </h3>
-              </div>
-              <p
-                className={cn(
-                  "max-w-xl text-[clamp(1rem,2vw,1.2rem)] leading-relaxed",
-                  isDark ? "text-cream/70" : "text-ink/65",
-                )}
+        <div className="relative mx-auto mt-14 max-w-5xl lg:mt-16">
+          {differentiation.points.map((point, index) => {
+            const fromLeft = index % 2 === 0;
+            const enterX = fromLeft ? -56 : 56;
+
+            return (
+              <div
+                key={point.title}
+                className="sticky mb-[35vh]"
+                style={{ top: STICKY_TOP, zIndex: index + 1 }}
               >
-                {point.description}
-              </p>
-            </ScrollStackItem>
-          ))}
-        </ScrollStack>
+                <motion.article
+                  className={cn(
+                    "flex min-h-[min(78vh,760px)] flex-col justify-center gap-7 rounded-[2rem] border border-border px-10 py-12 shadow-[0_18px_50px_rgba(0,0,0,0.12)] sm:px-14 sm:py-14 lg:min-h-[min(74vh,820px)] lg:gap-8 lg:rounded-[2.5rem] lg:px-16 lg:py-16",
+                    isDark
+                      ? "bg-[#121410] text-cream"
+                      : "bg-[#EFEEEA] text-ink",
+                  )}
+                  initial={{ opacity: 0, x: enterX }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{
+                    duration: 0.75,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                >
+                  <div className="flex items-center gap-4 sm:gap-5 lg:gap-6">
+                    <span
+                      aria-hidden
+                      className={cn(
+                        "inline-flex size-[4.5rem] shrink-0 items-center justify-center rounded-full sm:size-[5.25rem] lg:size-24",
+                        isDark ? "bg-cream" : "bg-ink",
+                      )}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element -- emoji-style icon */}
+                      <img
+                        src={point.icon}
+                        alt=""
+                        className="size-12 object-contain sm:size-14 lg:size-16"
+                      />
+                    </span>
+                    <h3 className="font-display text-[clamp(2.6rem,7vw,4.5rem)] font-semibold leading-[0.95] tracking-tight">
+                      {point.title}
+                    </h3>
+                  </div>
+                  <p
+                    className={cn(
+                      "max-w-3xl text-[clamp(1.25rem,2.8vw,1.85rem)] leading-snug",
+                      isDark ? "text-cream/70" : "text-ink/65",
+                    )}
+                  >
+                    {point.description}
+                  </p>
+                </motion.article>
+              </div>
+            );
+          })}
+          {/* Lets the last sticky card release cleanly into the next section */}
+          <div className="h-[20vh]" aria-hidden />
+        </div>
       </div>
     </section>
   );
