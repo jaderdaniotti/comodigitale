@@ -267,7 +267,7 @@ const ScrollExpand = ({
       className={`relative h-full w-full ${
         useWindowScroll
           ? ""
-          : "overflow-x-hidden overflow-y-auto overscroll-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          : "overflow-x-clip overflow-y-auto overscroll-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       } ${className}`.trim()}
       style={style}
     >

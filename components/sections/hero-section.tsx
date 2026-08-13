@@ -23,7 +23,7 @@ function MockupSlide({
   const [mobileOk, setMobileOk] = useState(true);
 
   return (
-    <div className="relative w-full pb-[12%] pt-2">
+    <div className="relative w-full overflow-hidden pb-[12%] pt-2">
       {/* Desktop frame — fills most of the column */}
       <div className="relative z-10 w-[88%] overflow-hidden rounded-2xl border border-border bg-ink text-cream shadow-2xl lg:rounded-[1.25rem]">
         <div className="flex items-center gap-1.5 border-b border-cream/10 bg-ink px-3 py-2.5">
@@ -172,13 +172,13 @@ export function HeroSection() {
       id="hero"
       className="relative overflow-hidden bg-hero pt-8 text-foreground lg:pt-12"
     >
-      <div className="page-shell grid gap-10 pb-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.25fr)] lg:items-center lg:gap-8 lg:pb-24 xl:gap-10">
-        <Reveal delay={0.05} y={16}>
+      <div className="page-shell grid min-w-0 gap-10 pb-16 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.25fr)] lg:items-center lg:gap-8 lg:pb-24 xl:gap-10">
+        <Reveal delay={0.05} y={16} className="min-w-0">
           <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-muted">
             {hero.eyebrow}
           </p>
 
-          <h1 className="font-display max-w-xl text-[clamp(2.2rem,4.8vw,3.75rem)] font-semibold leading-[1.04] tracking-tight">
+          <h1 className="font-display max-w-xl break-words text-[clamp(2.2rem,4.8vw,3.75rem)] font-semibold leading-[1.04] tracking-tight">
             {hero.headline}
           </h1>
 

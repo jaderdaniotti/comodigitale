@@ -12,7 +12,7 @@ export const site = {
 export const navItems = [
   { label: "Home", href: "/#hero" },
   { label: "Servizi", href: "/#servizi" },
-  { label: "Portfolio", href: "/#portfolio" },
+  // { label: "Portfolio", href: "/#portfolio" },
   { label: "Processo", href: "/#processo" },
   { label: "Chi siamo", href: "/#chi-siamo" },
   { label: "Contatti", href: "/#contatti" },
@@ -286,6 +286,47 @@ export const finalCta = {
   body: "Raccontaci cosa vuoi costruire. Ti risponderemo con una prima valutazione del progetto.",
   cta: "Raccontaci il tuo progetto",
   alt: "Oppure scrivici direttamente",
+} as const;
+
+export const contactForm = {
+  tabs: {
+    privato: "Privato",
+    azienda: "Azienda",
+  },
+  optionalHint: "facoltativo",
+  fields: {
+    fullName: "Nome e cognome",
+    companyName: "Nome azienda",
+    contactPerson: "Nome referente",
+    vat: "Partita IVA",
+    phone: "Telefono",
+    email: "Email",
+    website: "Sito web attuale",
+    service: "Tipo di servizio",
+    budget: "Budget",
+    message: "Raccontaci il progetto",
+    privacy: "Ho letto e accetto l'informativa sulla privacy.",
+  },
+  placeholders: {
+    service: "Seleziona un servizio",
+    budget: "Seleziona un range",
+  },
+  services: [
+    "Siti Web",
+    "E-commerce",
+    "Web Development",
+    "Automazioni",
+    "Brand identity",
+    "Ads",
+    "Altro",
+  ],
+  budgets: [
+    "Da definire",
+    "Fino a 2.000 €",
+    "2.000 – 5.000 €",
+    "5.000 – 10.000 €",
+    "Oltre 10.000 €",
+  ],
 } as const;
 
 export const footerLinks = {

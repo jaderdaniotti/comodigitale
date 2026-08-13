@@ -1,19 +1,9 @@
-"use client";
-
-import { FormEvent, useState } from "react";
 import { Mail, MessageCircle } from "lucide-react";
-import { Button } from "@/components/button";
+import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/reveal";
 import { finalCta, site } from "@/lib/home-content";
 
 export function FinalCtaSection() {
-  const [sent, setSent] = useState(false);
-
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSent(true);
-  }
-
   return (
     <section id="contatti" className="bg-background py-24 text-foreground lg:py-32">
       <div className="page-shell">
@@ -27,54 +17,9 @@ export function FinalCtaSection() {
         </Reveal>
 
         <Reveal delay={0.18}>
-          <form
-            onSubmit={onSubmit}
-            className="mx-auto mt-12 max-w-xl rounded-[1.75rem] border border-border bg-foreground/[0.03] p-6 md:p-8"
-          >
-            {sent ? (
-              <p className="text-center font-display text-xl font-semibold">
-                Grazie. Ti ricontattiamo a breve.
-              </p>
-            ) : (
-              <div className="space-y-4">
-                <label className="block">
-                  <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                    Nome
-                  </span>
-                  <input
-                    required
-                    name="nome"
-                    className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition focus:border-foreground/40"
-                  />
-                </label>
-                <label className="block">
-                  <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                    Email
-                  </span>
-                  <input
-                    required
-                    type="email"
-                    name="email"
-                    className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition focus:border-foreground/40"
-                  />
-                </label>
-                <label className="block">
-                  <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                    Raccontaci il progetto
-                  </span>
-                  <textarea
-                    required
-                    name="messaggio"
-                    rows={4}
-                    className="w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition focus:border-foreground/40"
-                  />
-                </label>
-                <Button type="submit" className="w-full">
-                  {finalCta.cta}
-                </Button>
-              </div>
-            )}
-          </form>
+          <div className="mx-auto mt-12 max-w-2xl rounded-[1.75rem] border border-border bg-foreground/[0.03] p-6 md:p-8">
+            <ContactForm />
+          </div>
         </Reveal>
 
         <Reveal delay={0.22} className="mt-10 text-center">

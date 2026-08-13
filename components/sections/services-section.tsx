@@ -43,13 +43,13 @@ export function ServicesSection() {
         hintClassName={isDark ? "text-white/70" : "text-ink"}
         className="min-h-0"
       >
-        <ul className="mx-auto flex w-fit max-w-full flex-col items-stretch gap-3 sm:gap-4 md:gap-5">
+        <ul className="mx-auto flex w-full max-w-3xl flex-col items-stretch sm:max-w-4xl">
           {scrollExpandSection.services.map((service) => (
             <li
               key={service.label}
               className={cn(
-                "flex items-center gap-3 sm:gap-3.5",
-                "font-display text-[clamp(1.6rem,5.5vw,4.25rem)] font-semibold leading-none tracking-tight",
+                "flex min-w-0 flex-col items-center gap-2 border-b border-current/25 py-3 text-center last:border-b-0 sm:flex-row sm:gap-4 sm:py-4 sm:text-left",
+                "font-display text-[clamp(2.15rem,8.5vw,4.25rem)] font-semibold leading-none tracking-tight",
                 isDark
                   ? "text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.65)]"
                   : "text-ink",
@@ -58,7 +58,7 @@ export function ServicesSection() {
               <span
                 aria-hidden
                 className={cn(
-                  "inline-flex size-[0.85em] shrink-0 items-center justify-center rounded-full",
+                  "inline-flex size-[1.05em] shrink-0 items-center justify-center rounded-full sm:size-[1.1em]",
                   isDark ? "bg-cream" : "bg-ink",
                 )}
               >
@@ -66,10 +66,10 @@ export function ServicesSection() {
                 <img
                   src={service.icon}
                   alt=""
-                  className="size-[0.62em] object-contain"
+                  className="size-[0.72em] object-contain sm:size-[0.78em]"
                 />
               </span>
-              <span className="text-left">{service.label}</span>
+              <span className="text-center sm:text-left">{service.label}</span>
             </li>
           ))}
         </ul>

@@ -23,7 +23,7 @@ export function ProcessSection() {
   return (
     <section
       id="processo"
-      className="bg-background py-20 text-foreground lg:py-28"
+      className="bg-background py-20 text-foreground lg:py-10 border-y border-border"
     >
       <div className="page-shell">
         <Reveal className="mx-auto max-w-5xl text-center">

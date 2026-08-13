@@ -6,8 +6,8 @@ import { authorityStrip } from "@/lib/home-content";
 
 export function AuthorityStripSection() {
   return (
-    <section className="flex flex-col items-center justify-center overflow-hidden border-y border-border bg-background pt-5 text-foreground lg:pt-7">
-      <Reveal delay={0.12} className="w-full">
+    <section className="w-full overflow-hidden border-y border-border bg-background text-foreground">
+      <Reveal delay={0.12} className="flex h-11 w-full items-center sm:h-16 lg:h-20">
         <CurvedLoop
           marqueeText={authorityStrip.marqueeText}
           speed={2}

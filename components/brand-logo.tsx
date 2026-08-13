@@ -8,9 +8,10 @@ import { cn } from "@/lib/cn";
 type BrandLogoProps = {
   className?: string;
   priority?: boolean;
+  fill?: boolean;
 };
 
-export function BrandLogo({ className, priority }: BrandLogoProps) {
+export function BrandLogo({ className, priority, fill }: BrandLogoProps) {
   const { logoSrc, theme, mounted } = useTheme();
   const src = mounted ? logoSrc : themeLogos.dark;
 
@@ -18,12 +19,18 @@ export function BrandLogo({ className, priority }: BrandLogoProps) {
     <Image
       src={src}
       alt={site.name}
-      width={72}
-      height={72}
       priority={priority}
       unoptimized
-      className={cn("h-16 w-16 object-contain md:h-[4.5rem] md:w-[4.5rem]", className)}
+      className={cn(
+        fill
+          ? "object-contain"
+          : "h-16 w-16 object-contain md:h-[4.5rem] md:w-[4.5rem]",
+        className,
+      )}
       key={mounted ? theme : "ssr"}
+      {...(fill
+        ? { fill: true, sizes: "(max-width: 1024px) 90vw, 40vw" }
+        : { width: 72, height: 72 })}
     />
   );
 }

@@ -36,7 +36,7 @@ export function HomePageShell() {
           <ProcessSection />
           <TechSection />
           <TestimonialsSection />
-          <CaseStudySection />
+          {/* <CaseStudySection /> */}
           <LocalSection />
           <FinalCtaSection />
         </main>

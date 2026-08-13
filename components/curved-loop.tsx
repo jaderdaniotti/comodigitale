@@ -41,8 +41,8 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
   const [offset, setOffset] = useState(0);
   const uid = useId();
   const pathId = `curve-${uid.replace(/:/g, "")}`;
-  const pathY = 55;
-  const pathD = `M-100,${pathY} Q500,${pathY + curveAmount} 1540,${pathY}`;
+  const pathY = 80;
+  const pathD = `M-40,${pathY} Q720,${pathY + curveAmount} 1480,${pathY}`;
 
   const dragRef = useRef(false);
   const lastXRef = useRef(0);
@@ -51,7 +51,7 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
 
   const textLength = spacing;
   const totalText = textLength
-    ? Array(Math.ceil(1800 / textLength) + 2)
+    ? Array(Math.ceil(2200 / textLength) + 2)
         .fill(text)
         .join("")
     : text;
@@ -131,7 +131,7 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
 
   return (
     <div
-      className="flex w-full items-center justify-center"
+      className="flex h-full w-full items-center justify-center"
       style={{ visibility: ready ? "visible" : "hidden", cursor: cursorStyle }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -139,8 +139,9 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
       onPointerLeave={endDrag}
     >
       <svg
-        className="block aspect-[1440/72] w-full select-none overflow-visible font-display text-[clamp(2rem,6vw,5rem)] font-bold uppercase leading-none"
-        viewBox="0 0 1440 72"
+        className="block h-full w-full select-none overflow-hidden font-display text-[clamp(2.35rem,8.5vw,4.25rem)] font-bold uppercase leading-none"
+        viewBox="0 0 1440 160"
+        preserveAspectRatio="none"
       >
         <text
           ref={measureRef}
@@ -161,6 +162,7 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
         {ready ? (
           <text
             xmlSpace="preserve"
+            dominantBaseline="middle"
             className={`fill-current ${className ?? ""}`}
           >
             <textPath
@@ -168,6 +170,7 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
               href={`#${pathId}`}
               startOffset={offset + "px"}
               xmlSpace="preserve"
+              dominantBaseline="middle"
             >
               {totalText}
             </textPath>

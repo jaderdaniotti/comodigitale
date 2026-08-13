@@ -26,7 +26,7 @@ export function SiteHeader({ className }: SiteHeaderProps) {
           className,
         )}
       >
-        <div className="page-shell flex h-[5rem] items-center justify-between gap-4 md:h-[5.25rem]">
+        <div className="page-shell flex h-[5rem] min-w-0 items-center justify-between gap-4 md:h-[5.25rem]">
           <Link
             href="/#hero"
             className="flex items-center gap-3 text-foreground"
