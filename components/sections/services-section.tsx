@@ -48,7 +48,7 @@ export function ServicesSection() {
             <li
               key={service.label}
               className={cn(
-                "flex min-w-0 flex-col items-center gap-2 border-b border-current/25 py-3 text-center last:border-b-0 sm:flex-row sm:gap-4 sm:py-4 sm:text-left",
+                "flex min-w-0 flex-col items-center gap-2  py-2 text-center last:border-b-0 sm:flex-row sm:gap-4 sm:py-4 sm:text-left",
                 "font-display text-[clamp(2.15rem,8.5vw,4.25rem)] font-semibold leading-none tracking-tight",
                 isDark
                   ? "text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.65)]"

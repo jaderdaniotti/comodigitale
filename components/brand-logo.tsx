@@ -24,7 +24,7 @@ export function BrandLogo({ className, priority, fill }: BrandLogoProps) {
       className={cn(
         fill
           ? "object-contain"
-          : "h-16 w-16 object-contain md:h-[4.5rem] md:w-[4.5rem]",
+          : "h-14 w-14 object-contain md:h-[4.5rem] md:w-[4.5rem]",
         className,
       )}
       key={mounted ? theme : "ssr"}
