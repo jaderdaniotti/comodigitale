@@ -1,6 +1,7 @@
 "use client";
 
 import { ExternalLink } from "lucide-react";
+import type { ReactNode } from "react";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import { SitePreviewFrame } from "@/components/site-preview-frame";
@@ -14,7 +15,15 @@ function hostnameOf(url: string) {
   }
 }
 
-export function PortfolioSection() {
+export function PortfolioSection({
+  label = "Portfolio",
+  title,
+  body,
+}: {
+  label?: string;
+  title?: ReactNode;
+  body?: string;
+}) {
   return (
     <section
       id="portfolio"
@@ -22,15 +31,19 @@ export function PortfolioSection() {
     >
       <div className="page-shell">
         <Reveal>
-          <SectionLabel>Portfolio</SectionLabel>
+          <SectionLabel>{label}</SectionLabel>
           <h2 className="font-display max-w-3xl text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-tight">
-            Non raccontiamo quello che sappiamo fare.
-            <br />
-            Te lo mostriamo.
+            {title ?? (
+              <>
+                Non raccontiamo quello che sappiamo fare.
+                <br />
+                Te lo mostriamo.
+              </>
+            )}
           </h2>
           <p className="mt-4 max-w-xl text-muted">
-            Una selezione di progetti live: anteprima del sito reale, nello
-            stesso browser.
+            {body ??
+              "Una selezione di progetti live: anteprima del sito reale, nello stesso browser."}
           </p>
         </Reveal>
 

@@ -41,7 +41,7 @@ export function ServiceDetailContent({ page }: { page: ServicePage }) {
               {page.heroBody}
             </p>
             <div className="mt-10">
-              <Button href="#contatti">{page.heroCta}</Button>
+              <Button href="/contatti">{page.heroCta}</Button>
             </div>
           </Reveal>
         </div>

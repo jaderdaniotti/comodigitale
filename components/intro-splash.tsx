@@ -10,18 +10,23 @@ const HOLD_MS = 900;
 const FADE_MS = 600;
 const TOTAL_MS = GATHER_MS + STAGGER_MS + HOLD_MS;
 
+let homeIntroPlayed = false;
+
 export function IntroSplash() {
   const [active, setActive] = useState(false);
   const [visible, setVisible] = useState(false);
   const [fontsReady, setFontsReady] = useState(false);
 
   useEffect(() => {
+    if (homeIntroPlayed) return;
+
     const desktop = window.matchMedia("(min-width: 768px)");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     if (!desktop.matches || reduced.matches) return;
 
     let cancelled = false;
+    let kickoff: number | undefined;
     let hideTimer: number | undefined;
     let unmountTimer: number | undefined;
 
@@ -46,10 +51,17 @@ export function IntroSplash() {
       }, TOTAL_MS + FADE_MS);
     };
 
-    void start();
+    // Defer so React Strict Mode's immediate unmount/remount does not skip
+    // the intro, while still marking it played for later client navigations.
+    kickoff = window.setTimeout(() => {
+      if (cancelled || homeIntroPlayed) return;
+      homeIntroPlayed = true;
+      void start();
+    }, 0);
 
     return () => {
       cancelled = true;
+      if (kickoff) window.clearTimeout(kickoff);
       if (hideTimer) window.clearTimeout(hideTimer);
       if (unmountTimer) window.clearTimeout(unmountTimer);
       document.body.style.overflow = "";

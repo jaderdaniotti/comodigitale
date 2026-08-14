@@ -53,7 +53,7 @@ export function CaseStudySection() {
           </p>
 
           <Button
-            href="#contatti"
+            href="/contatti"
             variant="linkAccent"
             className="mt-8 tracking-[0.12em]"
           >

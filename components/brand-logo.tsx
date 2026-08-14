@@ -9,9 +9,10 @@ type BrandLogoProps = {
   className?: string;
   priority?: boolean;
   fill?: boolean;
+  sizes?: string;
 };
 
-export function BrandLogo({ className, priority, fill }: BrandLogoProps) {
+export function BrandLogo({ className, priority, fill, sizes }: BrandLogoProps) {
   const { logoSrc, theme, mounted } = useTheme();
   const src = mounted ? logoSrc : themeLogos.dark;
 
@@ -29,7 +30,7 @@ export function BrandLogo({ className, priority, fill }: BrandLogoProps) {
       )}
       key={mounted ? theme : "ssr"}
       {...(fill
-        ? { fill: true, sizes: "(max-width: 1024px) 90vw, 40vw" }
+        ? { fill: true, sizes: sizes ?? "(max-width: 1024px) 90vw, 40vw" }
         : { width: 72, height: 72 })}
     />
   );

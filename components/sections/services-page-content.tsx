@@ -104,7 +104,7 @@ export function ServicesPageContent() {
               {servicesPage.body}
             </p>
             <div className="mt-10">
-              <Button href="#contatti">{servicesPage.cta}</Button>
+              <Button href="/contatti">{servicesPage.cta}</Button>
             </div>
           </Reveal>
         </div>

@@ -1,21 +1,27 @@
 export const site = {
   name: "comodigitale",
   tagline: "Digital solutions for ambitious businesses.",
-  location: "Como, Italia",
+  location: "Como, Lombardia — Italia",
   email: "info@comodigitale.it",
   whatsapp: "390000000000",
   phoneDisplay: "+39 000 000 0000",
   piva: "00000000000",
   year: 2026,
+  socials: {
+    instagram: "https://www.instagram.com/comodigitale/",
+    linkedin: "https://www.linkedin.com/company/comodigitale/",
+    github: "https://github.com/comodigitale",
+  },
 } as const;
 
 export const navItems = [
   { label: "Home", href: "/#hero" },
   { label: "Servizi", href: "/servizi" },
   { label: "Portfolio", href: "/#portfolio" },
-  { label: "Processo", href: "/#processo" },
+  { label: "Processo", href: "/processo" },
+  { label: "Perché noi", href: "/perche-noi" },
   { label: "Chi siamo", href: "/#chi-siamo" },
-  { label: "Contatti", href: "/#contatti" },
+  { label: "Contatti", href: "/contatti" },
 ] as const;
 
 export const hero = {
@@ -371,8 +377,9 @@ export const footerLinks = {
   ],
   agency: [
     { label: "Portfolio", href: "/#portfolio" },
-    { label: "Processo", href: "/#processo" },
+    { label: "Processo", href: "/processo" },
+    { label: "Perché noi", href: "/perche-noi" },
     { label: "Chi siamo", href: "/#chi-siamo" },
-    { label: "Contatti", href: "/#contatti" },
+    { label: "Contatti", href: "/contatti" },
   ],
 } as const;

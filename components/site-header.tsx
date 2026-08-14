@@ -6,9 +6,21 @@ import { Menu, Moon, Sun } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
 import { Button } from "@/components/button";
 import { SiteMenu } from "@/components/site-menu";
+import StaggeredMenu from "@/components/staggered-menu";
 import { useTheme } from "@/components/theme-provider";
 import { navItems, site } from "@/lib/home-content";
 import { cn } from "@/lib/cn";
+
+const staggeredItems = navItems.map((item) => ({
+  label: item.label,
+  ariaLabel: item.label,
+  link: item.href,
+}));
+
+const staggeredSocials = [
+  { label: "Email", link: `mailto:${site.email}` },
+  { label: "WhatsApp", link: `https://wa.me/${site.whatsapp}` },
+];
 
 type SiteHeaderProps = {
   className?: string;
@@ -22,7 +34,7 @@ export function SiteHeader({ className }: SiteHeaderProps) {
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 border-b border-foreground/10 bg-background",
+          "sticky top-0 z-[70] border-b border-foreground/10 bg-background",
           className,
         )}
       >
@@ -37,18 +49,6 @@ export function SiteHeader({ className }: SiteHeaderProps) {
               {site.name}
             </span>
           </Link>
-
-          <nav className="hidden items-center gap-7 xl:flex">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/75 transition hover:text-foreground"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
             <button
@@ -68,12 +68,32 @@ export function SiteHeader({ className }: SiteHeaderProps) {
             </button>
 
             <Button
-              href="/#contatti"
+              href="/contatti"
               size="sm"
               className="hidden md:inline-flex"
             >
               Parliamo del tuo progetto
             </Button>
+
+            <div className="hidden xl:block">
+              <StaggeredMenu
+                position="right"
+                items={staggeredItems}
+                socialItems={staggeredSocials}
+                displaySocials
+                displayItemNumbering
+                showLogo={false}
+                colors={
+                  theme === "light"
+                    ? ["#E3FF04", "#0A0C00"]
+                    : ["#E3FF04", "#F6F5F3"]
+                }
+                accentColor="#E3FF04"
+                menuButtonColor={theme === "light" ? "#0A0C00" : "#F6F5F3"}
+                openMenuButtonColor={theme === "light" ? "#0A0C00" : "#F6F5F3"}
+                changeMenuColorOnOpen={false}
+              />
+            </div>
 
             <button
               type="button"
