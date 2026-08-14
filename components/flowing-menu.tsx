@@ -75,6 +75,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
   const marqueeInnerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Tween | null>(null);
   const [repetitions, setRepetitions] = useState(4);
+  const [imageFailed, setImageFailed] = useState(false);
 
   const animationDefaults = { duration: 0.6, ease: "expo" };
 
@@ -171,7 +172,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
       .to(marqueeInnerRef.current, { y: edge === "top" ? "101%" : "-101%" }, 0);
   };
 
-  const emojiSrc = image ? encodeURI(image) : "";
+  const emojiSrc = image && !imageFailed ? image : "";
 
   const renderEmoji = () =>
     emojiSrc ? (
@@ -180,6 +181,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
         alt=""
         aria-hidden="true"
         className="h-[1.15em] w-[1.15em] shrink-0 object-contain"
+        onError={() => setImageFailed(true)}
       />
     ) : emoji ? (
       <span className="inline-block font-normal normal-case" aria-hidden="true">

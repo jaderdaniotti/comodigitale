@@ -3,16 +3,22 @@ import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/reveal";
 import { finalCta, site } from "@/lib/home-content";
 
-export function FinalCtaSection() {
+export function FinalCtaSection({
+  title,
+  body,
+}: {
+  title?: string;
+  body?: string;
+}) {
   return (
     <section id="contatti" className="bg-background py-24 text-foreground lg:py-32">
       <div className="page-shell">
         <Reveal className="mx-auto max-w-3xl text-center">
           <h2 className="font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-tight">
-            {finalCta.title}
+            {title ?? finalCta.title}
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted">
-            {finalCta.body}
+            {body ?? finalCta.body}
           </p>
         </Reveal>
 

@@ -10,13 +10,13 @@ export const serviceHighlights = [
   {
     slug: "sito-48h",
     title: "Sito pronto in 48/72 ore",
-    body: "Scegli un template, ci dai logo, foto e testi. Personalizziamo e pubblichiamo. Una linea commerciale veloce, con un prezzo più accessibile del custom.",
+    body: "Scegli un template, ci dai logo, foto e testi. Personalizziamo e pubblichiamo. Una linea pensata per chi ha i materiali pronti e vuole partire in pochi giorni.",
     points: ["10–20 template", "Personalizzazione", "Pubblicazione inclusa"],
   },
   {
     slug: "one-page",
     title: "OnePage Start",
-    body: "Una pagina chiara, responsive, con SEO base, WhatsApp, Maps e social. Per chi vuole essere online senza un investimento da 1.000–2.000€.",
+    body: "Una pagina chiara, responsive, con SEO base, WhatsApp, Maps e social. Per chi vuole una presenza digitale essenziale, senza un progetto complesso.",
     points: ["Una pagina", "Dominio e pubblicazione", "Contatti e WhatsApp"],
   },
   {
@@ -36,12 +36,12 @@ export const serviceGroups = [
   {
     id: "prodotti",
     label: "Prodotti rapidi",
-    title: "Online in pochi giorni, con un prezzo chiaro.",
+    title: "Online in pochi giorni, con un percorso definito.",
   },
   {
     id: "sistemi",
     label: "Sistemi e prodotti",
-    title: "Oltre la vetrina: prenotazioni, preventivi, configuratori.",
+    title: "Oltre la vetrina: prenotazioni e preventivi.",
   },
 ] as const;
 
@@ -155,7 +155,7 @@ export const serviceOffers = [
     title: "Band ed eventi musicali",
     emoji: "🎸",
     summary:
-      "Biografia, date, media e booking per musicisti, DJ e band. Un template moderno a prezzo fisso.",
+      "Biografia, date, media e booking per musicisti, DJ e band. Un template moderno, pensato per il prossimo ingaggio.",
     features: [
       "Calendario concerti",
       "Foto e video",
@@ -240,7 +240,7 @@ export const serviceOffers = [
     title: "OnePage Start",
     emoji: "📄",
     summary:
-      "Una pagina, responsive, SEO base, contatti e pubblicazione. Il prodotto economico per chi deve partire subito.",
+      "Una pagina, responsive, SEO base, contatti e pubblicazione. Per chi deve partire subito con una presenza essenziale.",
     features: [
       "Una pagina",
       "SEO base",
@@ -257,14 +257,14 @@ export const serviceOffers = [
     title: "Sito in 48/72 ore",
     emoji: "⚡",
     summary:
-      "Il cliente sceglie il template e fornisce i materiali. Noi personalizziamo e pubblichiamo, a un prezzo inferiore al custom.",
+      "Il cliente sceglie il template e fornisce i materiali. Noi personalizziamo e pubblichiamo, in tempi rapidi.",
     features: [
       "Scelta template",
       "Logo e testi",
       "Personalizzazione",
       "Pubblicazione",
       "Tempi certi",
-      "Prezzo fisso",
+      "Identità visiva",
     ],
   },
   {
@@ -274,7 +274,7 @@ export const serviceOffers = [
     title: "Palestre e personal trainer",
     emoji: "🏋️",
     summary:
-      "Non una vetrina: prenotazione corsi, schede, abbonamenti e pagamenti. Un micro-SaaS con entrate ricorrenti.",
+      "Non una vetrina: prenotazione corsi, schede, abbonamenti e comunicazioni. Uno strumento per gestire palestra e clienti.",
     features: [
       "Prenotazione corsi",
       "Calendario",
@@ -299,23 +299,6 @@ export const serviceOffers = [
       "Zona",
       "Tempistiche",
       "Richiesta unica",
-    ],
-  },
-  {
-    group: "sistemi",
-    slug: "configuratore",
-    icon: "sliders",
-    title: "Siti con configuratore",
-    emoji: "🎛️",
-    summary:
-      "Cucine, infissi, tende, piscine: il cliente configura colore, misura e accessori e invia una richiesta. Un servizio raro rispetto alla vetrina.",
-    features: [
-      "Colori",
-      "Dimensioni",
-      "Materiali",
-      "Accessori",
-      "Preventivo",
-      "Catalogo",
     ],
   },
   {
@@ -403,20 +386,22 @@ const SERVICE_EMOJI_FILES: Record<string, string> = {
   "sito-48h": "48_72ore.svg",
   palestre: "palestre.svg",
   "preventivi-online": "preventivi.svg",
-  configuratore: "configuratore.svg",
   prenotazioni: "prenotazione.svg",
   "cv-portfolio": "portfolio.svg",
   "eventi-locali": "eventi.svg",
   digitalizzazione: "digitalizzazione.svg",
 };
 
-const SERVICE_EMOJI_DIR = "/img/pagina servizi";
+const SERVICE_EMOJI_DIR = "/img/pagina-servizi";
+
+export function getServiceEmojiSrc(slug: string) {
+  const file = SERVICE_EMOJI_FILES[slug];
+  return file ? `${SERVICE_EMOJI_DIR}/${file}` : "";
+}
 
 export const serviceIndexItems = serviceOffers.map((offer) => ({
-  link: `#${offer.slug}`,
+  link: `/servizi/${offer.slug}`,
   text: offer.title,
-  image: SERVICE_EMOJI_FILES[offer.slug]
-    ? `${SERVICE_EMOJI_DIR}/${SERVICE_EMOJI_FILES[offer.slug]}`
-    : "",
+  image: getServiceEmojiSrc(offer.slug),
   emoji: offer.emoji,
 }));
