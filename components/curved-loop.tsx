@@ -34,15 +34,21 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
     );
   }, [marqueeText]);
 
+  const wrapRef = useRef<HTMLDivElement | null>(null);
   const measureRef = useRef<SVGTextElement | null>(null);
+  const htmlMeasureRef = useRef<HTMLSpanElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
   const textPathRef = useRef<SVGTextPathElement | null>(null);
   const pathRef = useRef<SVGPathElement | null>(null);
   const [spacing, setSpacing] = useState(0);
-  const [offset, setOffset] = useState(0);
+  const [box, setBox] = useState({ w: 1440, h: 80 });
+  const offsetRef = useRef(0);
   const uid = useId();
   const pathId = `curve-${uid.replace(/:/g, "")}`;
-  const pathY = 80;
-  const pathD = `M-40,${pathY} Q720,${pathY + curveAmount} 1480,${pathY}`;
+  const fontSize = Math.max(22, Math.round(box.h * 0.62));
+  const pathY = box.h / 2;
+  const pathD = `M0,${pathY} Q${box.w / 2},${pathY + curveAmount} ${box.w},${pathY}`;
+  const isFlat = curveAmount === 0;
 
   const dragRef = useRef(false);
   const lastXRef = useRef(0);
@@ -51,41 +57,60 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
 
   const textLength = spacing;
   const totalText = textLength
-    ? Array(Math.ceil(2200 / textLength) + 2)
+    ? Array(Math.ceil((box.w * 2) / textLength) + 2)
         .fill(text)
         .join("")
     : text;
   const ready = spacing > 0;
 
   useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      if (width > 0 && height > 0) {
+        setBox({ w: width, h: height });
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (isFlat) {
+      if (htmlMeasureRef.current) setSpacing(htmlMeasureRef.current.offsetWidth);
+      return;
+    }
     if (measureRef.current)
       setSpacing(measureRef.current.getComputedTextLength());
-  }, [text, className]);
+  }, [text, className, fontSize, box.w, box.h, isFlat]);
+
+  const applyOffset = (value: number) => {
+    offsetRef.current = value;
+    if (textPathRef.current) {
+      textPathRef.current.setAttribute("startOffset", `${value}px`);
+    }
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translate3d(${value}px,0,0)`;
+    }
+  };
 
   useEffect(() => {
     if (!spacing) return;
-    if (textPathRef.current) {
-      const initial = -spacing;
-      textPathRef.current.setAttribute("startOffset", initial + "px");
-      setOffset(initial);
-    }
+    applyOffset(-spacing);
   }, [spacing]);
 
   useEffect(() => {
     if (!spacing || !ready) return;
     let frame = 0;
     const step = () => {
-      if (!dragRef.current && textPathRef.current) {
+      if (!dragRef.current) {
         const delta = dirRef.current === "right" ? speed : -speed;
-        const currentOffset = parseFloat(
-          textPathRef.current.getAttribute("startOffset") || "0",
-        );
-        let newOffset = currentOffset + delta;
+        let newOffset = offsetRef.current + delta;
         const wrapPoint = spacing;
         if (newOffset <= -wrapPoint) newOffset += wrapPoint;
         if (newOffset > 0) newOffset -= wrapPoint;
-        textPathRef.current.setAttribute("startOffset", newOffset + "px");
-        setOffset(newOffset);
+        applyOffset(newOffset);
       }
       frame = requestAnimationFrame(step);
     };
@@ -102,19 +127,15 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
   };
 
   const onPointerMove = (e: PointerEvent) => {
-    if (!interactive || !dragRef.current || !textPathRef.current) return;
+    if (!interactive || !dragRef.current) return;
     const dx = e.clientX - lastXRef.current;
     lastXRef.current = e.clientX;
     velRef.current = dx;
-    const currentOffset = parseFloat(
-      textPathRef.current.getAttribute("startOffset") || "0",
-    );
-    let newOffset = currentOffset + dx;
+    let newOffset = offsetRef.current + dx;
     const wrapPoint = spacing;
     if (newOffset <= -wrapPoint) newOffset += wrapPoint;
     if (newOffset > 0) newOffset -= wrapPoint;
-    textPathRef.current.setAttribute("startOffset", newOffset + "px");
-    setOffset(newOffset);
+    applyOffset(newOffset);
   };
 
   const endDrag = () => {
@@ -129,23 +150,57 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
       : "grab"
     : "auto";
 
+  const sharedPointer = {
+    onPointerDown,
+    onPointerMove,
+    onPointerUp: endDrag,
+    onPointerLeave: endDrag,
+  };
+
+  if (isFlat) {
+    return (
+      <div
+        ref={wrapRef}
+        className="flex h-full w-full items-center overflow-hidden"
+        style={{ visibility: ready ? "visible" : "hidden", cursor: cursorStyle }}
+        {...sharedPointer}
+      >
+        <span
+          ref={htmlMeasureRef}
+          aria-hidden
+          className="pointer-events-none invisible absolute whitespace-nowrap font-display font-bold uppercase leading-none"
+          style={{ fontSize }}
+        >
+          {text}
+        </span>
+        <div
+          ref={trackRef}
+          className={`flex w-max items-center whitespace-nowrap font-display font-bold uppercase leading-none will-change-transform ${className ?? ""}`}
+          style={{ fontSize }}
+        >
+          {totalText}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
+      ref={wrapRef}
       className="flex h-full w-full items-center justify-center"
       style={{ visibility: ready ? "visible" : "hidden", cursor: cursorStyle }}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={endDrag}
-      onPointerLeave={endDrag}
+      {...sharedPointer}
     >
       <svg
-        className="block h-full w-full select-none overflow-hidden font-display text-[clamp(2.35rem,8.5vw,4.25rem)] font-bold uppercase leading-none"
-        viewBox="0 0 1440 160"
-        preserveAspectRatio="none"
+        className="block h-full w-full select-none overflow-hidden font-display font-bold uppercase leading-none"
+        viewBox={`0 0 ${box.w} ${box.h}`}
+        preserveAspectRatio="xMidYMid meet"
+        style={{ fontSize }}
       >
         <text
           ref={measureRef}
           xmlSpace="preserve"
+          fontSize={fontSize}
           style={{ visibility: "hidden", opacity: 0, pointerEvents: "none" }}
         >
           {text}
@@ -162,13 +217,13 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
         {ready ? (
           <text
             xmlSpace="preserve"
-            dominantBaseline="middle"
+            fontSize={fontSize}
             className={`fill-current ${className ?? ""}`}
           >
             <textPath
               ref={textPathRef}
               href={`#${pathId}`}
-              startOffset={offset + "px"}
+              startOffset="0px"
               xmlSpace="preserve"
               dominantBaseline="middle"
             >

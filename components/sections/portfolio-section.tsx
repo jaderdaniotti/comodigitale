@@ -1,14 +1,25 @@
 "use client";
 
-import { Button } from "@/components/button";
+import { ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
+import { SitePreviewFrame } from "@/components/site-preview-frame";
 import { portfolioProjects } from "@/lib/home-content";
-import { cn } from "@/lib/cn";
+
+function hostnameOf(url: string) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
 
 export function PortfolioSection() {
   return (
-    <section id="portfolio" className="bg-background py-24 text-foreground lg:py-32">
+    <section
+      id="portfolio"
+      className="border-y border-border bg-background py-24 text-foreground lg:py-32"
+    >
       <div className="page-shell">
         <Reveal>
           <SectionLabel>Portfolio</SectionLabel>
@@ -18,52 +29,59 @@ export function PortfolioSection() {
             Te lo mostriamo.
           </h2>
           <p className="mt-4 max-w-xl text-muted">
-            Una selezione dei nostri progetti.
+            Una selezione di progetti live: anteprima del sito reale, nello
+            stesso browser.
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-4 md:grid-cols-3 md:grid-rows-2">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {portfolioProjects.map((project, index) => (
-            <Reveal
-              key={project.title}
-              delay={0.12 + index * 0.06}
-              className={cn(
-                project.size === "large" ? "md:col-span-2" : "md:col-span-1",
-              )}
-            >
-              <a
-                href="#contatti"
-                className={cn(
-                  "group relative flex min-h-[260px] flex-col justify-end overflow-hidden rounded-[1.75rem] border border-border p-6 transition duration-300 hover:scale-[1.01]",
-                  project.accent
-                    ? "bg-accent text-ink"
-                    : "bg-foreground/[0.04] text-foreground",
-                )}
-              >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(227,255,4,0.12),transparent_50%)] opacity-0 transition group-hover:opacity-100" />
-                <p className="relative text-[11px] font-semibold uppercase tracking-[0.18em] opacity-60">
-                  {project.tags}
-                </p>
-                <h3 className="relative mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">
-                  {project.title}
-                </h3>
-                <Button
-                  as="span"
-                  variant="link"
-                  className="relative mt-4 opacity-0 transition group-hover:opacity-100"
-                >
-                  Vedi progetto
-                </Button>
-              </a>
+            <Reveal key={project.url} delay={0.08 + (index % 3) * 0.05}>
+              <article className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-border bg-foreground/[0.03]">
+                <div className="flex items-center gap-1.5 border-b border-border px-3 py-2.5">
+                  <span className="h-2 w-2 rounded-full bg-accent" />
+                  <span className="h-2 w-2 rounded-full bg-foreground/20" />
+                  <span className="h-2 w-2 rounded-full bg-foreground/20" />
+                  <span className="ml-2 truncate text-[11px] text-muted">
+                    {hostnameOf(project.url)}
+                  </span>
+                </div>
+
+                <div className="relative aspect-video overflow-hidden bg-foreground/[0.04]">
+                  <SitePreviewFrame
+                    url={project.url}
+                    fallbackSrc={
+                      "desktopSrc" in project ? project.desktopSrc : undefined
+                    }
+                    alt={project.title}
+                    viewportWidth={1440}
+                    viewportHeight={900}
+                    sizes="(min-width: 1280px) 30vw, (min-width: 640px) 45vw, 100vw"
+                    lazy
+                  />
+                </div>
+
+                <div className="flex flex-1 flex-col gap-3 p-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
+                    {project.tags}
+                  </p>
+                  <h3 className="font-display text-xl font-semibold tracking-tight md:text-2xl">
+                    {project.title}
+                  </h3>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto inline-flex items-center gap-2 text-sm font-medium transition hover:opacity-70"
+                  >
+                    Apri sito
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </article>
             </Reveal>
           ))}
         </div>
-
-        <Reveal delay={0.2}>
-          <Button href="#contatti" variant="linkAccent" className="mt-10">
-            Vedi tutti i progetti
-          </Button>
-        </Reveal>
       </div>
     </section>
   );

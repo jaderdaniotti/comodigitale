@@ -1,30 +1,28 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/button";
 import { Reveal } from "@/components/reveal";
+import { SitePreviewFrame } from "@/components/site-preview-frame";
 import { hero, heroMockups } from "@/lib/home-content";
 
-const AUTOPLAY_MS = 4500;
+const AUTOPLAY_MS = 7000;
 
 function MockupSlide({
   desktopSrc,
   mobileSrc,
   name,
+  url,
 }: {
-  desktopSrc: string;
-  mobileSrc: string;
+  desktopSrc?: string;
+  mobileSrc?: string;
   name: string;
+  url?: string;
 }) {
-  const [desktopOk, setDesktopOk] = useState(true);
-  const [mobileOk, setMobileOk] = useState(true);
-
   return (
     <div className="relative w-full overflow-hidden pb-[12%] pt-2">
-      {/* Desktop frame — fills most of the column */}
       <div className="relative z-10 w-[88%] overflow-hidden rounded-2xl border border-border bg-ink text-cream shadow-2xl lg:rounded-[1.25rem]">
         <div className="flex items-center gap-1.5 border-b border-cream/10 bg-ink px-3 py-2.5">
           <span className="h-2.5 w-2.5 rounded-full bg-accent" />
@@ -35,49 +33,28 @@ function MockupSlide({
           </span>
         </div>
         <div className="relative aspect-[16/10] bg-cream/5">
-          {desktopOk ? (
-            <Image
-              src={desktopSrc}
-              alt={`${name} — desktop`}
-              fill
-              unoptimized
-              sizes="(min-width: 1024px) 55vw, 90vw"
-              className="object-cover object-top"
-              onError={() => setDesktopOk(false)}
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-cream/5 to-cream/10">
-              <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-cream/50">
-                Desktop · 1440×900
-              </span>
-            </div>
-          )}
+          <SitePreviewFrame
+            url={url}
+            fallbackSrc={desktopSrc}
+            alt={`${name} — desktop`}
+            viewportWidth={1440}
+            viewportHeight={900}
+            sizes="(min-width: 1024px) 55vw, 90vw"
+          />
         </div>
       </div>
 
-      {/* Mobile frame — overlaps bottom-right of desktop */}
       <div className="absolute bottom-0 right-0 z-20 w-[32%] max-w-[220px] overflow-hidden rounded-[1.5rem] border border-border bg-ink text-cream shadow-xl sm:max-w-[260px] lg:w-[30%] lg:max-w-[280px] lg:rounded-[1.75rem]">
         <div className="mx-auto mt-2 h-1.5 w-10 rounded-full bg-cream/20" />
         <div className="relative mx-1.5 mt-2 mb-1.5 aspect-[390/844] overflow-hidden rounded-[1.15rem] bg-cream/5">
-          {mobileOk ? (
-            <Image
-              src={mobileSrc}
-              alt={`${name} — mobile`}
-              fill
-              unoptimized
-              sizes="280px"
-              className="object-cover object-top"
-              onError={() => setMobileOk(false)}
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-accent/20 to-cream/10">
-              <span className="px-2 text-center text-[9px] font-semibold uppercase tracking-[0.14em] text-cream/50">
-                Mobile
-                <br />
-                390×844
-              </span>
-            </div>
-          )}
+          <SitePreviewFrame
+            url={url}
+            fallbackSrc={mobileSrc}
+            alt={`${name} — mobile`}
+            viewportWidth={390}
+            viewportHeight={844}
+            sizes="280px"
+          />
         </div>
       </div>
     </div>
@@ -85,7 +62,7 @@ function MockupSlide({
 }
 
 function HeroVisual() {
-  const slides = heroMockups.slice(0, 3);
+  const slides = heroMockups;
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -125,13 +102,14 @@ function HeroVisual() {
         >
           <MockupSlide
             name={current.name}
-            desktopSrc={current.desktopSrc}
-            mobileSrc={current.mobileSrc}
+            url={"url" in current ? current.url : undefined}
+            desktopSrc={"desktopSrc" in current ? current.desktopSrc : undefined}
+            mobileSrc={"mobileSrc" in current ? current.mobileSrc : undefined}
           />
         </motion.div>
       </AnimatePresence>
 
-      <div className="mt-5 flex items-center gap-2">
+      <div className="mt-5 flex flex-wrap items-center gap-2">
         <button
           type="button"
           onClick={() => go(-1)}
@@ -161,6 +139,17 @@ function HeroVisual() {
             />
           ))}
         </div>
+        {"url" in current && current.url ? (
+          <a
+            href={current.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-auto inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-muted transition hover:text-foreground"
+          >
+            Apri sito
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        ) : null}
       </div>
     </div>
   );

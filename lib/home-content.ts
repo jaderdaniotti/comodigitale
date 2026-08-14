@@ -12,7 +12,7 @@ export const site = {
 export const navItems = [
   { label: "Home", href: "/#hero" },
   { label: "Servizi", href: "/#servizi" },
-  // { label: "Portfolio", href: "/#portfolio" },
+  { label: "Portfolio", href: "/#portfolio" },
   { label: "Processo", href: "/#processo" },
   { label: "Chi siamo", href: "/#chi-siamo" },
   { label: "Contatti", href: "/#contatti" },
@@ -27,22 +27,32 @@ export const hero = {
   ctaSecondary: "Scopri cosa facciamo",
 } as const;
 
-/** Max 3 projects. Screens: desktop 1440×900 (16:10), mobile 390×844. */
+/** Live site previews in hero mockups. Screens: desktop 1440×900, mobile 390×844. */
 export const heroMockups = [
   {
     name: "Como Private Driver",
+    url: "https://www.comoprivatedriver.it/",
     desktopSrc: "/img/projects/comoprivatedriverpc.png",
     mobileSrc: "/img/projects/comoprivatedrivermobile.png",
+  },
+  {
+    name: "jaderweb",
+    url: "https://jaderweb.com/",
+    desktopSrc: "/img/projects/jaderwebpc.png",
+    mobileSrc: "/img/projects/jaderwebmobile.png",
+  },
+  {
+    name: "Eleonora Politi Photographer",
+    url: "https://eleonorapolitiphotographer.it/",
+  },
+  {
+    name: "Gioia Capelli",
+    url: "https://gioiacapelli.it/",
   },
   {
     name: "Spazio AC",
     desktopSrc: "/img/projects/spazioacpc.png",
     mobileSrc: "/img/projects/spazioacmobile.png",
-  },
-  {
-    name: "jaderweb",
-    desktopSrc: "/img/projects/jaderwebpc.png",
-    mobileSrc: "/img/projects/jaderwebmobile.png",
   },
 ] as const;
 
@@ -119,28 +129,51 @@ export const serviceCategories = [
 
 export const portfolioProjects = [
   {
-    title: "Hospitality Lago di Como",
+    title: "jaderweb",
     tags: "WEB DESIGN · NEXT.JS",
-    size: "large" as const,
-    accent: true,
+    url: "https://jaderweb.com/",
+    desktopSrc: "/img/projects/jaderwebpc.png",
   },
   {
-    title: "Boat Experience",
-    tags: "LANDING · BRAND",
-    size: "small" as const,
-    accent: false,
+    title: "Eleonora Politi Photographer",
+    tags: "PORTFOLIO · PHOTOGRAPHY",
+    url: "https://eleonorapolitiphotographer.it/",
   },
   {
-    title: "Retail Lombardo",
-    tags: "E-COMMERCE · SHOPIFY",
-    size: "small" as const,
-    accent: false,
+    title: "Como Private Driver",
+    tags: "HOSPITALITY · WEB",
+    url: "https://www.comoprivatedriver.it/",
+    desktopSrc: "/img/projects/comoprivatedriverpc.png",
   },
   {
-    title: "Studio Professionale",
-    tags: "CORPORATE · SEO",
-    size: "large" as const,
-    accent: false,
+    title: "Gioia Capelli",
+    tags: "RETAIL · WEB",
+    url: "https://gioiacapelli.it/",
+  },
+  {
+    title: "Pompe Funebri Tortarolo e Conti",
+    tags: "CORPORATE · WEB",
+    url: "https://www.pompefunebritortaroloeconti.it/",
+  },
+  {
+    title: "Como Lake Suites",
+    tags: "HOSPITALITY · WEB",
+    url: "https://www.comolakesuites.eu/",
+  },
+  {
+    title: "Lake Como in Car",
+    tags: "HOSPITALITY · WEB",
+    url: "https://www.lakecomoincar.eu/it",
+  },
+  {
+    title: "Authentic Pasta Lab",
+    tags: "FOOD · WEB",
+    url: "https://authenticpastalab.vercel.app/",
+  },
+  {
+    title: "Al Posta",
+    tags: "FOOD · WEB",
+    url: "https://alposta.vercel.app/",
   },
 ] as const;
 
