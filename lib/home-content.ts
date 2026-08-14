@@ -11,7 +11,7 @@ export const site = {
 
 export const navItems = [
   { label: "Home", href: "/#hero" },
-  { label: "Servizi", href: "/#servizi" },
+  { label: "Servizi", href: "/servizi" },
   { label: "Portfolio", href: "/#portfolio" },
   { label: "Processo", href: "/#processo" },
   { label: "Chi siamo", href: "/#chi-siamo" },
@@ -364,10 +364,10 @@ export const contactForm = {
 
 export const footerLinks = {
   services: [
-    { label: "Siti Web", href: "/#servizi" },
-    { label: "E-commerce", href: "/#servizi" },
-    { label: "Web Development", href: "/#servizi" },
-    { label: "Automazioni", href: "/#servizi" },
+    { label: "Siti Web", href: "/servizi" },
+    { label: "E-commerce", href: "/servizi" },
+    { label: "Web Development", href: "/servizi" },
+    { label: "Automazioni", href: "/servizi" },
   ],
   agency: [
     { label: "Portfolio", href: "/#portfolio" },

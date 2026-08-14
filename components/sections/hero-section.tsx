@@ -177,7 +177,7 @@ export function HeroSection() {
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Button href="#contatti">{hero.ctaPrimary}</Button>
-            <Button href="#servizi" variant="outline" arrow="down">
+            <Button href="/servizi" variant="outline" arrow="down">
               {hero.ctaSecondary}
             </Button>
           </div>

@@ -68,7 +68,7 @@ export function SiteHeader({ className }: SiteHeaderProps) {
             </button>
 
             <Button
-              href="#contatti"
+              href="/#contatti"
               size="sm"
               className="hidden md:inline-flex"
             >
