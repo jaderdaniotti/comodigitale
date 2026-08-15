@@ -31,6 +31,9 @@ const unbounded = Unbounded({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: OG_SITE_NAME,
+  verification: {
+    google: "Q4lrwvAMc0dWtKWPBikWM4Nbx6GFQH0RN8jzQrvJ7FA",
+  },
   openGraph: {
     type: "website",
     locale: OG_LOCALE,
