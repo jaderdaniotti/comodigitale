@@ -2,10 +2,9 @@ export const site = {
   name: "comodigitale",
   tagline: "Digital solutions for ambitious businesses.",
   location: "Como, Lombardia — Italia",
-  email: "info@comodigitale.it",
-  whatsapp: "390000000000",
-  phoneDisplay: "+39 000 000 0000",
-  piva: "00000000000",
+  email: "comodigitale.contatti@gmail.com",
+  whatsapp: "393513152008",
+  phoneDisplay: "+39 351 315 2008",
   year: 2026,
   socials: {
     instagram: "https://www.instagram.com/comodigitale/",

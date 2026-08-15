@@ -111,6 +111,7 @@ export function ContactStepForm() {
   const [data, setData] = useState<FormData>(emptyForm);
   const [error, setError] = useState("");
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const steps = useMemo(() => {
     if (mode === "quick") return ["who", "what", "contact"] as const;
@@ -157,13 +158,53 @@ export function ContactStepForm() {
     setStep((value) => value + 1);
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!current || !validateStep(current)) {
+    if (!mode || !current || !validateStep(current)) {
       setError(contactFormCopy.error);
       return;
     }
-    setSent(true);
+
+    setSubmitting(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mode,
+          clientType: data.clientType,
+          fullName: data.fullName,
+          companyName: data.companyName,
+          contactPerson: data.contactPerson,
+          vat: data.vat,
+          services: data.services,
+          budget: data.budget,
+          message: data.message,
+          website: data.website,
+          email: data.email,
+          phone: data.phone,
+          privacy: data.privacy,
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as {
+        ok?: boolean;
+        error?: string;
+      } | null;
+
+      if (!response.ok || !result?.ok) {
+        setError(result?.error || "Invio non riuscito. Riprova tra poco.");
+        return;
+      }
+
+      setSent(true);
+    } catch {
+      setError("Invio non riuscito. Controlla la connessione e riprova.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (sent) {
@@ -453,9 +494,11 @@ export function ContactStepForm() {
               </Button>
             ) : null}
             {isLast ? (
-              <Button type="submit">{contactFormCopy.submit}</Button>
+              <Button type="submit" disabled={submitting}>
+                {submitting ? "Invio in corso..." : contactFormCopy.submit}
+              </Button>
             ) : (
-              <Button type="button" onClick={goNext}>
+              <Button type="button" onClick={goNext} disabled={submitting}>
                 {contactFormCopy.next}
               </Button>
             )}

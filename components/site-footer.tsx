@@ -68,7 +68,14 @@ export function SiteFooter() {
                 {site.email}
               </a>
             </li>
-            <li>{site.phoneDisplay}</li>
+            <li>
+              <a
+                href={`tel:${site.whatsapp}`}
+                className="transition hover:text-foreground"
+              >
+                {site.phoneDisplay}
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -78,7 +85,7 @@ export function SiteFooter() {
           © {site.year} {site.name}
         </p>
         <p>
-          Privacy · Cookie · P.IVA {site.piva}
+          Privacy · Cookie
         </p>
       </div>
     </footer>
