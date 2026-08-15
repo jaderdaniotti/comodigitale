@@ -1,7 +1,9 @@
 "use client";
 
 import { FormEvent, useMemo, useState, type ReactNode } from "react";
+import Image from "next/image";
 import { Button } from "@/components/button";
+import { useTheme } from "@/components/theme-provider";
 import { cn } from "@/lib/cn";
 import { contactForm } from "@/lib/home-content";
 import {
@@ -106,6 +108,7 @@ function ChoiceCard({
 }
 
 export function ContactStepForm() {
+  const { theme } = useTheme();
   const [mode, setMode] = useState<ContactMode | null>(null);
   const [step, setStep] = useState(0);
   const [data, setData] = useState<FormData>(emptyForm);
@@ -208,12 +211,29 @@ export function ContactStepForm() {
   }
 
   if (sent) {
+    const heartSrc =
+      theme === "dark" ? "/img/svg/cuorebianco.svg" : "/img/svg/cuorenero.svg";
+
     return (
       <p
-        className="font-display py-16 text-center text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-tight"
+        className="font-display flex flex-wrap items-center justify-center gap-x-2 gap-y-1 py-16 text-center text-[clamp(1.5rem,3vw,2.25rem)] font-semibold tracking-tight"
         role="status"
       >
-        {contactFormCopy.success}
+        <span className="inline-flex items-center gap-2">
+          <span className="underline decoration-2 underline-offset-[0.18em]">
+            Grazie
+          </span>
+          <Image
+            src={heartSrc}
+            alt=""
+            width={28}
+            height={28}
+            unoptimized
+            className="h-[0.85em] w-[0.85em] object-contain"
+            aria-hidden
+          />
+        </span>
+        <span>Ti ricontattiamo a breve.</span>
       </p>
     );
   }
