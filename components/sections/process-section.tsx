@@ -1,5 +1,3 @@
-"use client";
-
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import { ProcessTimeline } from "@/components/process-timeline";

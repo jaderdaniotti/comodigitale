@@ -124,6 +124,7 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
     lastXRef.current = e.clientX;
     velRef.current = 0;
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    if (wrapRef.current) wrapRef.current.style.cursor = "grabbing";
   };
 
   const onPointerMove = (e: PointerEvent) => {
@@ -142,13 +143,10 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
     if (!interactive) return;
     dragRef.current = false;
     dirRef.current = velRef.current > 0 ? "right" : "left";
+    if (wrapRef.current) wrapRef.current.style.cursor = "grab";
   };
 
-  const cursorStyle = interactive
-    ? dragRef.current
-      ? "grabbing"
-      : "grab"
-    : "auto";
+  const cursorStyle = interactive ? "grab" : "auto";
 
   const sharedPointer = {
     onPointerDown,

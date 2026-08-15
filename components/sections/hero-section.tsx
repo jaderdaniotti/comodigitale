@@ -15,11 +15,13 @@ function MockupSlide({
   mobileSrc,
   name,
   url,
+  lcp = false,
 }: {
   desktopSrc?: string;
   mobileSrc?: string;
   name: string;
   url?: string;
+  lcp?: boolean;
 }) {
   return (
     <div className="relative w-full overflow-hidden pb-[12%] pt-2">
@@ -36,10 +38,11 @@ function MockupSlide({
           <SitePreviewFrame
             url={url}
             fallbackSrc={desktopSrc}
-            alt={`${name} — desktop`}
+            alt={`Homepage del sito ${name}`}
             viewportWidth={1440}
             viewportHeight={900}
             sizes="(min-width: 1024px) 55vw, 90vw"
+            fetchPriority={lcp ? "high" : "auto"}
           />
         </div>
       </div>
@@ -50,10 +53,11 @@ function MockupSlide({
           <SitePreviewFrame
             url={url}
             fallbackSrc={mobileSrc}
-            alt={`${name} — mobile`}
+            alt={`Versione mobile del sito ${name}`}
             viewportWidth={390}
             viewportHeight={844}
             sizes="280px"
+            lazy
           />
         </div>
       </div>
@@ -105,6 +109,7 @@ function HeroVisual() {
             url={"url" in current ? current.url : undefined}
             desktopSrc={"desktopSrc" in current ? current.desktopSrc : undefined}
             mobileSrc={"mobileSrc" in current ? current.mobileSrc : undefined}
+            lcp={index === 0}
           />
         </motion.div>
       </AnimatePresence>

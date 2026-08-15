@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { navItems, site } from "@/lib/home-content";
@@ -33,17 +34,19 @@ export function SiteMenu({ open, onClose }: SiteMenuProps) {
         >
           <div className="flex items-center justify-between px-6 py-5 lg:px-10">
             <div className="flex items-center gap-3">
-              <Image
-                src="/img/logo/logobiancosunero.svg"
-                alt={site.name}
-                width={48}
-                height={48}
-                unoptimized
-                className="h-10 w-10 object-contain"
-              />
-              <span className="font-display text-lg font-semibold tracking-tight">
-                {site.name}
-              </span>
+              <Link href="/" className="flex items-center gap-3 text-cream" onClick={onClose}>
+                <Image
+                  src="/img/logo/logobiancosunero.svg"
+                  alt={site.name}
+                  width={48}
+                  height={48}
+                  unoptimized
+                  className="h-10 w-10 object-contain"
+                />
+                <span className="font-display text-lg font-semibold tracking-tight">
+                  {site.name}
+                </span>
+              </Link>
             </div>
             <button
               type="button"

@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/button";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";

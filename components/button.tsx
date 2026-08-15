@@ -1,4 +1,5 @@
 import { ArrowDown, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import type {
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
@@ -129,6 +130,17 @@ export function Button(props: ButtonProps) {
       href,
       ...linkRest
     } = props;
+    const isInternal =
+      href.startsWith("/") && !href.startsWith("//") && !href.startsWith("/api/");
+
+    if (isInternal) {
+      return (
+        <Link href={href} className={classes} {...linkRest}>
+          {content}
+        </Link>
+      );
+    }
+
     return (
       <a href={href} className={classes} {...linkRest}>
         {content}

@@ -40,11 +40,11 @@ export function SiteHeader({ className }: SiteHeaderProps) {
       >
         <div className="page-shell flex h-[4.5rem] min-w-0 items-center justify-between gap-4 md:h-[5.25rem]">
           <Link
-            href="/#hero"
+            href="/"
             className="flex items-center gap-3 text-foreground"
             aria-label={site.name}
           >
-            <BrandLogo priority />
+            <BrandLogo />
             <span className="font-display hidden text-lg uppercase font-semibold tracking-tight sm:inline">
               {site.name}
             </span>

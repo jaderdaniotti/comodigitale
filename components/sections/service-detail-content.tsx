@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Button } from "@/components/button";
 import { StickyStackCards } from "@/components/sticky-stack-cards";
@@ -7,23 +5,41 @@ import { FinalCtaSection } from "@/components/sections/final-cta-section";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import type { ServicePage } from "@/lib/service-pages";
+import { getRelatedServicePages } from "@/lib/service-seo";
 import { getServiceEmojiSrc } from "@/lib/services-content";
 
 export function ServiceDetailContent({ page }: { page: ServicePage }) {
   const emojiSrc = getServiceEmojiSrc(page.slug);
+  const relatedPages = getRelatedServicePages(page.slug);
 
   return (
     <>
       <section className="bg-hero pt-16 pb-20 text-foreground lg:pt-24 lg:pb-28">
         <div className="page-shell">
           <Reveal>
-            <p className="mb-6 text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-              <Link href="/servizi" className="transition hover:text-foreground">
-                Servizi
-              </Link>
-              <span className="mx-2 text-border">/</span>
-              {page.name}
-            </p>
+            <nav aria-label="Percorso" className="mb-6">
+              <ol className="flex flex-wrap items-center text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+                <li>
+                  <Link href="/" className="transition hover:text-foreground">
+                    Home
+                  </Link>
+                </li>
+                <li className="flex items-center">
+                  <span className="mx-2 text-border" aria-hidden="true">
+                    /
+                  </span>
+                  <Link href="/servizi" className="transition hover:text-foreground">
+                    Servizi
+                  </Link>
+                </li>
+                <li className="flex items-center">
+                  <span className="mx-2 text-border" aria-hidden="true">
+                    /
+                  </span>
+                  <span aria-current="page">{page.name}</span>
+                </li>
+              </ol>
+            </nav>
             <SectionLabel>{page.name}</SectionLabel>
             <h1 className="font-display max-w-4xl text-[clamp(2.2rem,5.5vw,4.25rem)] font-semibold leading-[1.04] tracking-tight">
               {page.heroTitle}
@@ -184,6 +200,31 @@ export function ServiceDetailContent({ page }: { page: ServicePage }) {
                 ))}
               </ul>
             ) : null}
+          </div>
+        </section>
+      ) : null}
+
+      {relatedPages.length > 0 ? (
+        <section className="border-b border-border bg-background py-20 text-foreground lg:py-28">
+          <div className="page-shell">
+            <Reveal>
+              <SectionLabel>Servizi correlati</SectionLabel>
+              <h2 className="font-display max-w-3xl text-[clamp(1.8rem,4vw,3rem)] font-semibold leading-[1.05] tracking-tight">
+                Soluzioni collegate.
+              </h2>
+            </Reveal>
+            <ul className="mt-12 flex flex-wrap gap-3">
+              {relatedPages.map((related) => (
+                <li key={related.slug}>
+                  <Link
+                    href={`/servizi/${related.slug}`}
+                    className="inline-flex rounded-full border border-border px-4 py-2 text-sm text-muted transition hover:border-foreground/40 hover:text-foreground"
+                  >
+                    {related.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
       ) : null}

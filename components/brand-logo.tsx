@@ -7,12 +7,11 @@ import { cn } from "@/lib/cn";
 
 type BrandLogoProps = {
   className?: string;
-  priority?: boolean;
   fill?: boolean;
   sizes?: string;
 };
 
-export function BrandLogo({ className, priority, fill, sizes }: BrandLogoProps) {
+export function BrandLogo({ className, fill, sizes }: BrandLogoProps) {
   const { logoSrc, theme, mounted } = useTheme();
   const src = mounted ? logoSrc : themeLogos.dark;
 
@@ -20,7 +19,6 @@ export function BrandLogo({ className, priority, fill, sizes }: BrandLogoProps) 
     <Image
       src={src}
       alt={site.name}
-      priority={priority}
       unoptimized
       className={cn(
         fill

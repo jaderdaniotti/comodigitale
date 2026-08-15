@@ -1,5 +1,3 @@
-"use client";
-
 import CurvedLoop from "@/components/curved-loop";
 import { Reveal } from "@/components/reveal";
 import { authorityStrip } from "@/lib/home-content";

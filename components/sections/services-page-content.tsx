@@ -1,65 +1,10 @@
-"use client";
-
-import type { ComponentType } from "react";
-import {
-  Briefcase,
-  Building2,
-  CalendarCheck,
-  ClipboardList,
-  Dumbbell,
-  Hammer,
-  Heart,
-  House,
-  IdCard,
-  LayoutTemplate,
-  MapPinned,
-  Megaphone,
-  Music,
-  PartyPopper,
-  Rocket,
-  SlidersHorizontal,
-  Tent,
-  Trophy,
-  UtensilsCrossed,
-  Zap,
-} from "lucide-react";
 import { Button } from "@/components/button";
 import { FinalCtaSection } from "@/components/sections/final-cta-section";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import SplitText from "@/components/split-text";
 import FlowingMenu from "@/components/flowing-menu";
-import Link from "next/link";
-import {
-  serviceGroups,
-  serviceHighlights,
-  serviceIndexItems,
-  serviceOffers,
-  servicesPage,
-} from "@/lib/services-content";
-
-const icons: Record<string, ComponentType<{ className?: string }>> = {
-  heart: Heart,
-  tent: Tent,
-  utensils: UtensilsCrossed,
-  house: House,
-  briefcase: Briefcase,
-  trophy: Trophy,
-  music: Music,
-  building: Building2,
-  party: PartyPopper,
-  hammer: Hammer,
-  megaphone: Megaphone,
-  layout: LayoutTemplate,
-  zap: Zap,
-  dumbbell: Dumbbell,
-  clipboard: ClipboardList,
-  sliders: SlidersHorizontal,
-  calendar: CalendarCheck,
-  "id-card": IdCard,
-  map: MapPinned,
-  rocket: Rocket,
-};
+import { serviceIndexItems, servicesPage } from "@/lib/services-content";
 
 export function ServicesPageContent() {
   return (

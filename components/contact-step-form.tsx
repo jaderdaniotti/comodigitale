@@ -485,8 +485,14 @@ export function ContactStepForm() {
                     className="mt-1 h-4 w-4 shrink-0 accent-accent"
                   />
                   <span>
-                    {contactForm.fields.privacy}{" "}
-                    <span className="text-foreground/70">*</span>
+                    Ho letto e accetto l&apos;
+                    <a
+                      href="/privacy"
+                      className="text-foreground underline decoration-accent decoration-2 underline-offset-2 transition hover:opacity-70"
+                    >
+                      informativa sulla privacy
+                    </a>
+                    . <span className="text-foreground/70">*</span>
                   </span>
                 </label>
               </fieldset>

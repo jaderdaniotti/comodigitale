@@ -1,5 +1,3 @@
-"use client";
-
 import { ExternalLink } from "lucide-react";
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/reveal";

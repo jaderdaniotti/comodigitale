@@ -1,5 +1,3 @@
-"use client";
-
 import { BrandLogo } from "@/components/brand-logo";
 import { FinalCtaSection } from "@/components/sections/final-cta-section";
 import { Reveal } from "@/components/reveal";
@@ -44,16 +42,8 @@ export function WhyUsPageContent() {
   return (
     <>
       <section className="relative overflow-x-clip bg-hero pt-16 pb-20 text-foreground lg:pt-24 lg:pb-28">
-        <div className="pointer-events-none absolute inset-y-0 right-[clamp(1.25rem,3vw,3rem)] z-0 w-[min(48vw,32rem)] overflow-hidden">
-          <BrandLogo
-            fill
-            sizes="(max-width: 1024px) 48vw, 32rem"
-            className="origin-center scale-[2] object-contain object-right"
-            priority
-          />
-        </div>
-        <div className="page-shell relative z-10">
-          <div className="max-w-[min(100%,calc(100%-min(48vw,20rem)-1rem))]">
+        <div className="page-shell relative z-10 flex flex-col gap-10 lg:block">
+          <div className="w-full lg:max-w-[min(100%,calc(100%-min(48vw,20rem)-1rem))]">
             <Reveal>
               <SectionLabel>{whyUsPage.eyebrow}</SectionLabel>
             </Reveal>
@@ -81,6 +71,13 @@ export function WhyUsPageContent() {
                 {whyUsPage.body}
               </p>
             </Reveal>
+          </div>
+          <div className="pointer-events-none relative mx-auto aspect-square w-[min(70vw,18rem)] overflow-hidden lg:absolute lg:inset-y-0 lg:right-[clamp(1.25rem,3vw,3rem)] lg:mx-0 lg:aspect-auto lg:w-[min(48vw,32rem)]">
+            <BrandLogo
+              fill
+              sizes="(max-width: 1024px) 70vw, 32rem"
+              className="origin-center scale-125 object-contain object-center lg:scale-[2] lg:object-right"
+            />
           </div>
         </div>
       </section>

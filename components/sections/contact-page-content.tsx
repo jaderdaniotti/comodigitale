@@ -1,5 +1,3 @@
-"use client";
-
 import SplitText from "@/components/split-text";
 import { Button } from "@/components/button";
 import { ContactStepForm } from "@/components/contact-step-form";

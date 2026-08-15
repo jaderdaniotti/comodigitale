@@ -11,6 +11,7 @@ type SitePreviewFrameProps = {
   viewportHeight: number;
   sizes?: string;
   lazy?: boolean;
+  fetchPriority?: "high" | "low" | "auto";
 };
 
 export function SitePreviewFrame({
@@ -21,11 +22,21 @@ export function SitePreviewFrame({
   viewportHeight,
   sizes,
   lazy = false,
+  fetchPriority = "auto",
 }: SitePreviewFrameProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.2);
   const [inView, setInView] = useState(!lazy);
-  const [showIframe, setShowIframe] = useState(Boolean(url) && !lazy);
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
+  const [iframeDelayElapsed, setIframeDelayElapsed] = useState(false);
+  const [iframeFailed, setIframeFailed] = useState(false);
+
+  const imageReady = !fallbackSrc || loadedSrc === fallbackSrc;
+  const showIframe =
+    Boolean(url) &&
+    inView &&
+    !iframeFailed &&
+    (!fallbackSrc || imageReady || iframeDelayElapsed);
 
   useEffect(() => {
     const el = ref.current;
@@ -40,10 +51,7 @@ export function SitePreviewFrame({
   }, [viewportWidth]);
 
   useEffect(() => {
-    if (!lazy) {
-      setInView(true);
-      return;
-    }
+    if (!lazy) return;
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -60,8 +68,10 @@ export function SitePreviewFrame({
   }, [lazy]);
 
   useEffect(() => {
-    setShowIframe(Boolean(url) && inView);
-  }, [url, inView]);
+    if (!url || !inView || !fallbackSrc || imageReady) return;
+    const timeout = window.setTimeout(() => setIframeDelayElapsed(true), 2500);
+    return () => window.clearTimeout(timeout);
+  }, [url, inView, fallbackSrc, imageReady]);
 
   return (
     <div ref={ref} className="absolute inset-0 overflow-hidden bg-cream/5">
@@ -70,13 +80,16 @@ export function SitePreviewFrame({
           src={fallbackSrc}
           alt={alt}
           fill
-          unoptimized
-          sizes={sizes}
+          sizes={sizes ?? "100vw"}
+          loading={lazy ? "lazy" : "eager"}
+          fetchPriority={fetchPriority}
+          decoding="async"
           className="object-cover object-top"
+          onLoad={() => setLoadedSrc(fallbackSrc)}
         />
       ) : null}
 
-      {url && showIframe ? (
+      {showIframe ? (
         <iframe
           src={url}
           title={alt}
@@ -90,7 +103,7 @@ export function SitePreviewFrame({
             transform: `scale(${scale})`,
             pointerEvents: "none",
           }}
-          onError={() => setShowIframe(false)}
+          onError={() => setIframeFailed(true)}
         />
       ) : null}
     </div>

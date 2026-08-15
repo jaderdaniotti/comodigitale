@@ -81,15 +81,12 @@ const ScrollExpand = ({
   const stageRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef<HTMLDivElement | null>(null);
   const mediaRef = useRef<HTMLImageElement | HTMLVideoElement | null>(null);
-  const titleRef = useRef<HTMLDivElement | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const scrimRef = useRef<HTMLDivElement | null>(null);
   const hintRef = useRef<HTMLDivElement | null>(null);
 
-  const propsRef = useRef<Required<Pick<ScrollExpandProps, ConfigKey>>>(
-    {} as Required<Pick<ScrollExpandProps, ConfigKey>>,
-  );
-  propsRef.current = {
+  const propsRef = useRef<Required<Pick<ScrollExpandProps, ConfigKey>>>({
     startWidth,
     startHeight,
     startRadius,
@@ -101,7 +98,23 @@ const ScrollExpand = ({
     overlayScrim,
     useWindowScroll,
     enabled,
-  };
+  });
+
+  useEffect(() => {
+    propsRef.current = {
+      startWidth,
+      startHeight,
+      startRadius,
+      endRadius,
+      mediaZoom,
+      scrollDistance,
+      holdDistance,
+      smoothing,
+      overlayScrim,
+      useWindowScroll,
+      enabled,
+    };
+  });
 
   const applyProgress = useCallback((p: number) => {
     const frame = frameRef.current;
@@ -257,6 +270,11 @@ const ScrollExpand = ({
         className="absolute inset-0 h-full w-full origin-center object-cover select-none [will-change:transform]"
         src={src}
         alt={alt}
+        width={1920}
+        height={1080}
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
         draggable={false}
       />
     );
@@ -301,7 +319,7 @@ const ScrollExpand = ({
             ) : null}
           </div>
           {title ? (
-            <div
+            <h2
               ref={titleRef}
               className={`pointer-events-none absolute inset-0 m-0 flex items-center justify-center px-[6%] text-center font-display font-semibold leading-none tracking-[-0.03em] [font-size:var(--se-title-size)] [will-change:opacity,transform] ${
                 titleClassName ||
@@ -309,7 +327,7 @@ const ScrollExpand = ({
               }`}
             >
               {title}
-            </div>
+            </h2>
           ) : null}
           {scrollHint ? (
             <div

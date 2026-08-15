@@ -14,7 +14,7 @@ export const site = {
 } as const;
 
 export const navItems = [
-  { label: "Home", href: "/#hero" },
+  { label: "Home", href: "/" },
   { label: "Servizi", href: "/servizi" },
   { label: "Portfolio", href: "/#portfolio" },
   { label: "Processo", href: "/processo" },
@@ -71,7 +71,7 @@ export const scrollExpandSection = {
   scrollHint: "Scroll",
   imageSrcLight: "/img/sezione2bgchiaro.jpg",
   imageSrcDark: "/img/sezione2bgscuro.jpg",
-  imageAlt: "Partner digitale comodigitale",
+  imageAlt: "Team al lavoro su un progetto digitale",
   services: [
     { label: "Siti web", icon: "/img/svg/sitiweb.svg" },
     { label: "Ecommerce", icon: "/img/svg/ecommerce.svg" },
@@ -367,18 +367,7 @@ export const contactForm = {
   ],
 } as const;
 
-export const footerLinks = {
-  services: [
-    { label: "Siti Web", href: "/servizi" },
-    { label: "E-commerce", href: "/servizi" },
-    { label: "Web Development", href: "/servizi" },
-    { label: "Automazioni", href: "/servizi" },
-  ],
-  agency: [
-    { label: "Portfolio", href: "/#portfolio" },
-    { label: "Processo", href: "/processo" },
-    { label: "Perché noi", href: "/perche-noi" },
-    { label: "Chi siamo", href: "/#chi-siamo" },
-    { label: "Contatti", href: "/contatti" },
-  ],
-} as const;
+export const footerLegal = [
+  { label: "Privacy", href: "/privacy" },
+  { label: "Cookie", href: "/cookie" },
+] as const;

@@ -26,7 +26,6 @@ export function IntroSplash() {
     if (!desktop.matches || reduced.matches) return;
 
     let cancelled = false;
-    let kickoff: number | undefined;
     let hideTimer: number | undefined;
     let unmountTimer: number | undefined;
 
@@ -53,7 +52,7 @@ export function IntroSplash() {
 
     // Defer so React Strict Mode's immediate unmount/remount does not skip
     // the intro, while still marking it played for later client navigations.
-    kickoff = window.setTimeout(() => {
+    const kickoff = window.setTimeout(() => {
       if (cancelled || homeIntroPlayed) return;
       homeIntroPlayed = true;
       void start();

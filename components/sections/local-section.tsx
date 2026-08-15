@@ -1,5 +1,3 @@
-"use client";
-
 import { BrandLogo } from "@/components/brand-logo";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";

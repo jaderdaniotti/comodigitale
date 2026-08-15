@@ -1,0 +1,1149 @@
+Certo. Ti preparo un prompt pensato specificamente per Cursor + Next.js, con l'obiettivo di far eseguire un SEO audit e un'implementazione completa, senza permettere all'AI di stravolgere il copy o il design.
+Ho strutturato il prompt in modo che Cursor prima analizzi il progetto, poi faccia un piano, e solo dopo modifichi il codice. Inoltre gli imposto regole precise per le pagine dinamiche /servizi/[slug], metadata, JSON-LD, sitemap, canonical, Open Graph, internal linking, performance e local SEO.
+Puoi salvarlo come seo-audit-comodigitale.yml e incollarlo/importarlo come riferimento in Cursor.
+project:
+  name: "Comodigitale"
+  type: "Web Agency"
+  framework: "Next.js"
+  language: "Italian"
+  primary_domain: "https://comodigitale.com"
+  current_domain: "https://comodigitale.vercel.app"
+  objective: >
+    Ottimizzare l'intero sito Comodigitale per ottenere la migliore
+    indicizzazione organica possibile, mantenendo invariati il design,
+    il tono di voce e i testi commerciali esistenti, salvo modifiche
+    strettamente necessarie per correggere problemi SEO tecnici o semantici.
+
+role:
+  description: >
+    Agisci contemporaneamente come Senior Technical SEO Specialist,
+    Senior Next.js Developer, Information Architect e SEO Strategist.
+  expertise:
+    - "Technical SEO"
+    - "On-page SEO"
+    - "Semantic HTML"
+    - "Next.js App Router"
+    - "Metadata API"
+    - "JSON-LD / Schema.org"
+    - "Core Web Vitals"
+    - "Google Search Console"
+    - "Google Search"
+    - "Local SEO"
+    - "Internal linking"
+    - "SEO architecture"
+    - "Structured data"
+    - "Image SEO"
+    - "Performance optimization"
+
+critical_rules:
+
+  preserve_existing_content:
+    priority: "CRITICAL"
+    rules:
+      - >
+        NON riscrivere arbitrariamente i testi esistenti.
+      - >
+        NON modificare headline, slogan, paragrafi, CTA o contenuti commerciali
+        solamente per inserire keyword.
+      - >
+        NON trasformare il sito in un testo SEO artificiale.
+      - >
+        Mantieni il copy attuale e lavora principalmente su struttura,
+        metadata, semantica HTML, linking, schema, URL, immagini e aspetti tecnici.
+      - >
+        Se ritieni indispensabile modificare un testo visibile per motivi SEO,
+        NON farlo automaticamente: segnala prima la modifica nel report.
+      - >
+        Le keyword devono essere integrate naturalmente e mai ripetute
+        artificialmente.
+
+  preserve_design:
+    priority: "CRITICAL"
+    rules:
+      - "NON modificare il design visuale esistente."
+      - "NON cambiare colori."
+      - "NON cambiare font."
+      - "NON cambiare spacing."
+      - "NON cambiare animazioni salvo problemi di performance/accessibilità."
+      - "NON cambiare layout salvo necessità tecnica."
+      - "NON rimuovere componenti esistenti."
+      - "NON creare nuove sezioni visibili se non strettamente necessarie."
+      - >
+        L'obiettivo è migliorare il SEO senza rendere il sito più pesante,
+        più lungo o visivamente diverso.
+
+  no_keyword_stuffing:
+    priority: "CRITICAL"
+    rules:
+      - "Non ripetere keyword in modo artificiale."
+      - "Non creare hidden text."
+      - "Non creare testo fuori viewport per SEO."
+      - "Non utilizzare keyword invisibili."
+      - "Non utilizzare keyword stuffing."
+      - "Non creare pagine duplicate solamente per intercettare keyword simili."
+
+  no_fake_seo:
+    rules:
+      - "Non inventare recensioni."
+      - "Non inventare clienti."
+      - "Non inventare sedi."
+      - "Non inventare indirizzi."
+      - "Non inventare premi."
+      - "Non inventare statistiche."
+      - "Non inventare backlink."
+      - "Non utilizzare dati strutturati non supportati dal contenuto reale."
+
+architecture:
+  inspect_before_modify: true
+
+  first_action:
+    instructions:
+      - >
+        Analizza l'intero repository prima di modificare qualsiasi file.
+      - >
+        Identifica se il progetto utilizza App Router o Pages Router.
+      - >
+        Identifica la versione di Next.js.
+      - >
+        Analizza package.json.
+      - >
+        Analizza la struttura app/.
+      - >
+        Analizza components/.
+      - >
+        Analizza eventuali lib/.
+      - >
+        Analizza eventuali data files.
+      - >
+        Analizza tutte le route esistenti.
+      - >
+        Identifica la struttura delle pagine dinamiche.
+      - >
+        Identifica come vengono generate attualmente le pagine servizio.
+      - >
+        Identifica eventuali metadata già esistenti.
+      - >
+        Identifica sitemap e robots già presenti.
+      - >
+        Identifica eventuali JSON-LD già presenti.
+      - >
+        Identifica immagini, font e asset.
+      - >
+        Identifica eventuali problemi di hydration.
+      - >
+        Identifica eventuali componenti client inutilmente marcati "use client".
+
+  before_coding:
+    required_output:
+      - "Struttura del progetto"
+      - "Versione Next.js"
+      - "Router utilizzato"
+      - "Lista delle route"
+      - "Sistema metadata attuale"
+      - "Sistema sitemap attuale"
+      - "Sistema robots attuale"
+      - "Sistema canonical attuale"
+      - "Sistema JSON-LD attuale"
+      - "Problemi SEO individuati"
+      - "Problemi performance individuati"
+      - "Problemi accessibility individuati"
+      - "Problemi di internal linking"
+      - "Problemi delle immagini"
+      - "Problemi delle pagine dinamiche"
+      - "Piano di implementazione"
+
+  important:
+    instruction: >
+      Dopo l'analisi iniziale, procedi autonomamente con l'implementazione
+      delle modifiche SEO sicure. Non modificare il copy visibile senza
+      prima segnalarlo nel report finale.
+
+domain:
+  canonical_domain: "https://comodigitale.com"
+
+  requirements:
+    - >
+      Tutti i canonical devono utilizzare https://comodigitale.com.
+    - >
+      Tutti i metadata URL devono utilizzare https://comodigitale.com.
+    - >
+      Open Graph URL deve utilizzare https://comodigitale.com.
+    - >
+      Sitemap deve utilizzare https://comodigitale.com.
+    - >
+      robots.txt deve dichiarare la sitemap di https://comodigitale.com.
+    - >
+      Non utilizzare comodigitale.vercel.app come dominio canonico.
+    - >
+      Non creare URL relativi nei canonical.
+
+  redirect_note:
+    instruction: >
+      Se il redirect dal dominio comodigitale.vercel.app al dominio
+      comodigitale.com non può essere configurato dal repository,
+      non simulare il redirect nel codice. Segnalare che deve essere
+      configurato a livello Vercel/domain.
+
+site_structure:
+  main_routes:
+    - "/"
+    - "/servizi"
+    - "/portfolio"
+    - "/processo"
+    - "/perche-noi"
+    - "/chi-siamo"
+    - "/contatti"
+
+  services:
+    architecture: "/servizi/[slug]"
+
+    rules:
+      - >
+        Ogni servizio deve avere un URL unico, descrittivo e leggibile.
+      - >
+        Evitare ID numerici negli URL.
+      - >
+        Evitare query string per identificare servizi.
+      - >
+        Utilizzare slug lowercase.
+      - >
+        Utilizzare trattini.
+      - >
+        Evitare caratteri speciali.
+      - >
+        Evitare slug eccessivamente lunghi.
+      - >
+        Non cambiare slug esistenti senza verificare eventuali link interni.
+
+  target_services:
+    - name: "Siti per matrimoni"
+      slug: "siti-matrimoni"
+      primary_keyword: "sito matrimonio"
+      secondary_keywords:
+        - "sito web matrimonio"
+        - "sito per matrimonio"
+        - "sito matrimonio online"
+        - "sito per sposi"
+        - "sito matrimonio RSVP"
+        - "sito matrimonio conferma presenza"
+
+    - name: "Sagre ed eventi comunali"
+      slug: "sagre-eventi-comunali"
+      primary_keyword: "sito per sagra"
+      secondary_keywords:
+        - "sito web sagra"
+        - "sito per eventi"
+        - "sito evento comunale"
+        - "sito manifestazione"
+        - "sito festa patronale"
+        - "sito eventi locali"
+
+    - name: "Siti web per ristoranti"
+      slug: "ristoranti-prenotazione"
+      primary_keyword: "sito web ristorante"
+      secondary_keywords:
+        - "sito ristorante"
+        - "sito ristorante con prenotazione"
+        - "creazione sito ristorante"
+        - "menu digitale ristorante"
+        - "prenotazione tavoli online"
+
+    - name: "B&B e case vacanza"
+      slug: "bb-case-vacanza"
+      primary_keyword: "sito web b&b"
+      secondary_keywords:
+        - "sito b&b"
+        - "sito casa vacanze"
+        - "sito appartamento vacanze"
+        - "sito struttura ricettiva"
+        - "sito prenotazioni b&b"
+
+    - name: "Siti per professionisti"
+      slug: "siti-professionisti"
+      primary_keyword: "sito per professionisti"
+      secondary_keywords:
+        - "sito web professionista"
+        - "sito studio professionale"
+        - "sito consulente"
+        - "sito professionale"
+
+    - name: "Associazioni sportive"
+      slug: "associazioni-sportive"
+      primary_keyword: "sito associazione sportiva"
+      secondary_keywords:
+        - "sito società sportiva"
+        - "sito squadra sportiva"
+        - "sito associazione sportiva dilettantistica"
+        - "sito sportivo"
+
+    - name: "Band ed eventi musicali"
+      slug: "band-eventi-musicali"
+      primary_keyword: "sito web band"
+      secondary_keywords:
+        - "sito band musicale"
+        - "sito musicista"
+        - "sito gruppo musicale"
+        - "sito eventi musicali"
+
+    - name: "Agenzie immobiliari"
+      slug: "agenzie-immobiliari"
+      primary_keyword: "sito agenzia immobiliare"
+      secondary_keywords:
+        - "sito web agenzia immobiliare"
+        - "sito immobiliare"
+        - "sito per agenzia immobiliare"
+        - "portale immobili"
+        - "sito annunci immobiliari"
+
+    - name: "Eventi privati"
+      slug: "eventi-privati"
+      primary_keyword: "sito evento"
+      secondary_keywords:
+        - "sito evento privato"
+        - "sito web evento"
+        - "pagina evento"
+        - "sito festa"
+
+    - name: "Siti per artigiani"
+      slug: "siti-artigiani"
+      primary_keyword: "sito web artigiano"
+      secondary_keywords:
+        - "sito per artigiani"
+        - "sito impresa artigiana"
+        - "sito azienda artigiana"
+        - "sito web impresa"
+
+    - name: "Landing page"
+      slug: "landing-page"
+      primary_keyword: "landing page"
+      secondary_keywords:
+        - "creazione landing page"
+        - "landing page professionale"
+        - "landing page conversione"
+        - "landing page campagne pubblicitarie"
+
+    - name: "Siti One Page"
+      slug: "one-page"
+      primary_keyword: "sito one page"
+      secondary_keywords:
+        - "sito web una pagina"
+        - "sito one page professionale"
+        - "realizzazione sito one page"
+
+    - name: "Siti web in 48/72 ore"
+      slug: "sito-48-72-ore"
+      primary_keyword: "sito web veloce"
+      secondary_keywords:
+        - "sito web rapido"
+        - "realizzazione sito web veloce"
+        - "sito web in pochi giorni"
+        - "sito web urgente"
+
+    - name: "Palestre e personal trainer"
+      slug: "palestre-personal-trainer"
+      primary_keyword: "sito web palestra"
+      secondary_keywords:
+        - "sito per palestra"
+        - "sito personal trainer"
+        - "sito centro fitness"
+        - "prenotazione corsi palestra"
+
+    - name: "Sistema preventivi online"
+      slug: "sistema-preventivi-online"
+      primary_keyword: "preventivo online"
+      secondary_keywords:
+        - "sistema preventivi online"
+        - "richiesta preventivo online"
+        - "modulo preventivo online"
+        - "configuratore preventivo"
+
+    - name: "Sistema di prenotazione"
+      slug: "portali-prenotazione"
+      primary_keyword: "prenotazioni online"
+      secondary_keywords:
+        - "sistema prenotazioni online"
+        - "sistema di prenotazione"
+        - "prenotazione appuntamenti online"
+        - "software prenotazioni"
+
+    - name: "Portfolio e CV online"
+      slug: "portfolio-cv-online"
+      primary_keyword: "portfolio online"
+      secondary_keywords:
+        - "portfolio personale"
+        - "portfolio professionale"
+        - "CV online"
+        - "curriculum online"
+        - "sito portfolio"
+
+    - name: "Portali eventi locali"
+      slug: "portali-eventi-locali"
+      primary_keyword: "portale eventi"
+      secondary_keywords:
+        - "portale eventi locali"
+        - "sito eventi locali"
+        - "calendario eventi"
+        - "eventi città"
+
+    - name: "Digitalizzazione aziendale"
+      slug: "digitalizzazione-aziendale"
+      primary_keyword: "digitalizzazione aziendale"
+      secondary_keywords:
+        - "digitalizzazione imprese"
+        - "digitalizzazione PMI"
+        - "digitalizzazione processi aziendali"
+        - "automazione processi aziendali"
+        - "trasformazione digitale"
+
+metadata:
+  implementation:
+    preferred:
+      - "Next.js Metadata API"
+      - "generateMetadata() per pagine dinamiche"
+      - "metadataBase"
+
+  metadata_base:
+    value: "https://comodigitale.com"
+
+  requirements:
+    every_indexable_page:
+      - "title unico"
+      - "description unica"
+      - "canonical unico"
+      - "Open Graph"
+      - "Twitter/X card"
+      - "og:image"
+      - "og:url"
+      - "og:type"
+      - "og:site_name"
+
+    rules:
+      - >
+        Non utilizzare lo stesso title su più pagine.
+      - >
+        Non utilizzare la stessa description su più pagine.
+      - >
+        Evitare title generici come "Home", "Servizi", "Pagina".
+      - >
+        Evitare keyword stuffing.
+      - >
+        Il brand Comodigitale deve essere presente quando utile,
+        senza rendere i title inutilmente lunghi.
+
+  homepage:
+    title: "Web Agency a Como | Siti Web, E-commerce e Soluzioni Digitali"
+    description: >
+      Comodigitale è una web agency a Como specializzata in siti web,
+      e-commerce, sviluppo su misura e soluzioni digitali per aziende e professionisti.
+
+  services_index:
+    title: "Servizi Web e Soluzioni Digitali | Comodigitale"
+    description: >
+      Scopri i servizi web di Comodigitale: siti per attività e professionisti,
+      e-commerce, sistemi di prenotazione, automazioni, configuratori e soluzioni digitali su misura.
+
+  why_us:
+    title: "Perché scegliere Comodigitale | Web Agency a Como"
+    description: >
+      Scopri perché scegliere Comodigitale: sviluppo su misura, tecnologie moderne,
+      performance, personalizzazione e un approccio digitale orientato al tuo progetto.
+
+  process:
+    title: "Come Lavoriamo | Processo di Sviluppo Web | Comodigitale"
+    description: >
+      Scopri come lavoriamo: discovery, strategia, design, sviluppo, test,
+      pubblicazione e supporto per la realizzazione di progetti digitali.
+
+  about:
+    title: "Chi Siamo | Web Agency a Como | Comodigitale"
+    description: >
+      Conosci Comodigitale, web agency con base a Como specializzata in sviluppo web,
+      e-commerce, automazioni e soluzioni digitali su misura.
+
+  contact:
+    title: "Contatti | Web Agency a Como | Comodigitale"
+    description: >
+      Contatta Comodigitale per parlare del tuo progetto web, e-commerce,
+      automazione o soluzione digitale. Siamo una web agency con base a Como.
+
+service_metadata:
+  rules:
+    - >
+      Ogni pagina servizio deve utilizzare generateMetadata().
+    - >
+      Title e description devono essere generati dinamicamente dai dati del servizio.
+    - >
+      Non usare metadata identici tra servizi.
+    - >
+      La keyword primaria deve essere coerente con l'intento della pagina.
+    - >
+      Non inserire tutte le secondary keywords nel title.
+    - >
+      Non creare title innaturali.
+    - >
+      La description deve descrivere realmente il servizio.
+    - >
+      Il canonical deve puntare all'URL definitivo del servizio.
+
+  recommended_title_pattern: >
+    {Primary Keyword} | {Specific Value Proposition} | Comodigitale
+
+  fallback_title_pattern: >
+    {Primary Keyword} | Comodigitale
+
+  recommended_description_pattern: >
+    {Descrizione naturale del servizio con 1-2 concetti secondari rilevanti}.
+
+semantic_html:
+  requirements:
+    - "Una sola H1 per pagina."
+    - "H2 per le sezioni principali."
+    - "H3 per eventuali sottosezioni."
+    - "Non usare heading solo per ottenere dimensioni grafiche."
+    - "Usare nav, main, header, footer, section, article quando semanticamente appropriato."
+    - "CTA devono essere veri link o button."
+    - "Link interni devono essere elementi <a> crawlable."
+    - "Non affidarsi esclusivamente a onClick per la navigazione."
+
+  h1_rules:
+    important: >
+      NON sostituire gli H1 commerciali esistenti solo per inserire keyword.
+      Se l'H1 attuale è semanticamente valido, conservarlo.
+
+internal_linking:
+  priority: "HIGH"
+
+  requirements:
+    - >
+      Ogni pagina servizio deve essere raggiungibile dalla pagina /servizi.
+    - >
+      Ogni pagina servizio deve contenere link verso servizi correlati.
+    - >
+      Utilizzare anchor text descrittivi.
+    - >
+      Evitare anchor generici come "clicca qui".
+    - >
+      Creare una rete semantica tra servizi.
+    - >
+      La homepage deve linkare alle aree principali del sito.
+    - >
+      /servizi deve linkare a tutti i servizi indicizzabili.
+    - >
+      /portfolio deve linkare ai singoli case study quando disponibili.
+    - >
+      I case study devono linkare ai servizi utilizzati nel progetto.
+    - >
+      /contatti deve essere raggiungibile facilmente dalle pagine commerciali.
+
+  example:
+    restaurant:
+      related_services:
+        - "/servizi/portali-prenotazione"
+        - "/servizi/landing-page"
+        - "/servizi/digitalizzazione-aziendale"
+
+    wedding:
+      related_services:
+        - "/servizi/eventi-privati"
+        - "/servizi/portali-prenotazione"
+        - "/servizi/portfolio-cv-online"
+
+breadcrumbs:
+  enabled: true
+
+  structure:
+    - "Home"
+    - "Servizi"
+    - "{Nome servizio}"
+
+  implementation:
+    - "UI breadcrumb visibile e discreta"
+    - "Schema.org BreadcrumbList"
+    - "URL coerenti con la struttura"
+
+structured_data:
+  priority: "HIGH"
+
+  global:
+    type: "Organization"
+
+    fields:
+      - "name"
+      - "url"
+      - "logo"
+      - "email"
+      - "telephone"
+      - "sameAs"
+
+  homepage:
+    preferred_types:
+      - "Organization"
+      - "WebSite"
+
+  service_pages:
+    type: "Service"
+
+    required:
+      - "name"
+      - "description"
+      - "provider"
+      - "url"
+
+    provider:
+      type: "Organization"
+      name: "Comodigitale"
+
+  breadcrumbs:
+    type: "BreadcrumbList"
+
+  rules:
+    - >
+      JSON-LD deve rappresentare esclusivamente contenuti realmente presenti nella pagina.
+    - >
+      Non aggiungere recensioni o rating inesistenti.
+    - >
+      Non utilizzare dati strutturati falsi.
+    - >
+      Evitare duplicazione inutile di JSON-LD.
+    - >
+      Validare JSON-LD sintatticamente.
+
+images:
+  requirements:
+    - >
+      Analizza tutte le immagini del progetto.
+    - >
+      Identifica immagini prive di alt quando l'alt è necessario.
+    - >
+      Sostituisci alt generici come "Image" quando l'immagine è informativa.
+    - >
+      Mantieni alt vuoto per immagini puramente decorative.
+    - >
+      Non inserire keyword artificiali negli alt.
+    - >
+      Usa descrizioni naturali e specifiche.
+    - >
+      Verifica width e height.
+    - >
+      Utilizza Next/Image quando appropriato.
+    - >
+      Verifica lazy loading.
+    - >
+      Evita immagini enormi inutilmente.
+    - >
+      Preferire WebP/AVIF quando compatibile con il progetto.
+
+  examples:
+    good:
+      - "Sito web per matrimonio realizzato da Comodigitale"
+      - "Homepage del sito Como Private Driver"
+      - "Design responsive di un sito web per ristorante"
+
+    bad:
+      - "image"
+      - "foto"
+      - "seo"
+      - "web agency como sito matrimonio sito web"
+
+performance:
+  priority: "HIGH"
+
+  objectives:
+    - "Ottimizzare LCP."
+    - "Ottimizzare INP."
+    - "Ridurre CLS."
+    - "Ridurre JavaScript inutilizzato."
+    - "Ridurre bundle non necessari."
+    - "Ottimizzare immagini."
+    - "Ottimizzare font."
+    - "Ridurre client components inutili."
+    - "Evitare hydration non necessaria."
+    - "Utilizzare Server Components quando appropriato."
+    - "Mantenere animazioni e design esistenti salvo problemi reali."
+
+  do_not:
+    - "Non eliminare animazioni solo perché esistono."
+    - "Non convertire indiscriminatamente tutto in Server Components."
+    - "Non introdurre librerie pesanti per semplici funzioni."
+    - "Non introdurre plugin SEO inutili."
+
+robots:
+  file: "/app/robots.ts"
+
+  requirements:
+    user_agent: "*"
+    allow: "/"
+    sitemap: "https://comodigitale.com/sitemap.xml"
+
+  do_not_block:
+    - "/"
+    - "/servizi"
+    - "/servizi/*"
+    - "/portfolio"
+    - "/processo"
+    - "/perche-noi"
+    - "/chi-siamo"
+    - "/contatti"
+
+sitemap:
+  file: "/app/sitemap.ts"
+
+  requirements:
+    include:
+      - "/"
+      - "/servizi"
+      - "/portfolio"
+      - "/processo"
+      - "/perche-noi"
+      - "/chi-siamo"
+      - "/contatti"
+      - "all indexable service pages"
+      - "all indexable portfolio/case study pages"
+
+    exclude:
+      - "404"
+      - "error"
+      - "private routes"
+      - "admin routes"
+      - "preview-only routes"
+      - "non-indexable technical routes"
+
+  rules:
+    - "Non creare URL duplicate."
+    - "Non inserire URL canonical non esistenti."
+    - "Utilizzare URL assoluti basati su https://comodigitale.com."
+
+indexation:
+  requirements:
+    indexable:
+      - "Homepage"
+      - "Services"
+      - "Service detail pages"
+      - "Portfolio"
+      - "Portfolio detail pages"
+      - "Process"
+      - "Why us"
+      - "About"
+      - "Contact"
+
+    noindex_candidates:
+      - "Preview routes"
+      - "Internal test pages"
+      - "Development pages"
+      - "Duplicate utility pages"
+
+  rule: >
+    Non applicare noindex a una pagina semplicemente perché ha poco testo.
+    Valutare prima il valore SEO e l'intento della pagina.
+
+open_graph:
+  global:
+    site_name: "Comodigitale"
+    type: "website"
+    locale: "it_IT"
+
+  requirements:
+    - "Ogni pagina importante deve avere immagine OG coerente."
+    - "OG image deve essere assoluta."
+    - "OG image deve esistere realmente."
+    - "Utilizzare immagini specifiche per servizi quando possibile."
+    - "Non usare un'immagine rotta."
+    - "Non generare dinamicamente immagini enormi inutilmente."
+
+local_seo:
+  primary_location:
+    city: "Como"
+    region: "Lombardia"
+    country: "Italia"
+
+  rules:
+    - >
+      Utilizzare Como e Lombardia naturalmente nei metadata e nelle pagine
+      dove è realmente pertinente.
+    - >
+      Non aggiungere keyword geografiche artificialmente in ogni paragrafo.
+    - >
+      Non creare pagine locali duplicate solo cambiando la città.
+    - >
+      Preparare il sito per Google Business Profile.
+    - >
+      Mantenere coerenza di nome, indirizzo, telefono e dominio se presenti.
+
+google_business_profile:
+  note: >
+    Non creare o modificare il profilo Google Business Profile dal codice.
+    Preparare esclusivamente il sito per una corretta local SEO.
+
+technical_checks:
+  inspect:
+    - "404 handling"
+    - "redirects"
+    - "canonical"
+    - "duplicate URLs"
+    - "trailing slash consistency"
+    - "http/https"
+    - "www/non-www consistency"
+    - "metadata duplication"
+    - "missing metadata"
+    - "missing H1"
+    - "multiple H1"
+    - "broken internal links"
+    - "broken external links"
+    - "orphan pages"
+    - "image alt"
+    - "large images"
+    - "client/server boundaries"
+    - "hydration errors"
+    - "sitemap"
+    - "robots"
+    - "structured data"
+    - "Open Graph"
+    - "Twitter/X metadata"
+
+url_policy:
+  canonical_style: "https://comodigitale.com/path"
+  trailing_slash: "do not force unless project convention requires it"
+
+  rules:
+    - "Lowercase slugs."
+    - "Hyphens instead of underscores."
+    - "No spaces."
+    - "No unnecessary parameters."
+    - "No random IDs."
+    - "No duplicate URLs."
+
+accessibility:
+  requirements:
+    - "Alt text appropriato."
+    - "Semantic HTML."
+    - "Accessible buttons."
+    - "Accessible links."
+    - "Keyboard navigation."
+    - "ARIA only when necessary."
+    - "Form labels corretti."
+    - "Input associati ai relativi label."
+    - "Focus states."
+    - "Contrasto sufficiente."
+
+  rule: >
+    Non sacrificare accessibilità per ottenere un effetto visuale.
+
+forms:
+  contact:
+    requirements:
+      - "Ogni input deve avere un label."
+      - "Usare autocomplete quando appropriato."
+      - "Email input type=email."
+      - "Telefono input type=tel."
+      - "Required fields correttamente dichiarati."
+      - "Messaggi di errore accessibili."
+      - "Non inserire dati personali nei metadata."
+      - "Non indicizzare dati inviati dagli utenti."
+
+security:
+  requirements:
+    - "Non esporre API keys."
+    - "Non esporre environment variables."
+    - "Non inserire email personali nei dati strutturati se non pubbliche."
+    - "Non inserire dati sensibili nel client."
+    - "Non compromettere CSP o security headers esistenti."
+
+nextjs:
+  requirements:
+    - >
+      Utilizzare correttamente l'App Router se il progetto lo utilizza.
+    - >
+      Preferire generateMetadata() per route dinamiche.
+    - >
+      Utilizzare metadataBase.
+    - >
+      Utilizzare app/sitemap.ts quando appropriato.
+    - >
+      Utilizzare app/robots.ts quando appropriato.
+    - >
+      Utilizzare Server Components quando possibile.
+    - >
+      Evitare "use client" non necessario.
+    - >
+      Non duplicare metadata statici e dinamici.
+    - >
+      Non generare sitemap manualmente se Next.js può generarlo.
+    - >
+      Utilizzare generateStaticParams() se i servizi sono statici e compatibile
+      con l'architettura esistente.
+    - >
+      Non modificare inutilmente l'architettura del progetto.
+
+service_data_architecture:
+  recommendation:
+    instruction: >
+      Se i servizi sono attualmente hardcoded nelle pagine, valuta la possibilità
+      di centralizzare i dati SEO e commerciali in una struttura dati tipizzata,
+      mantenendo invariato il rendering esistente.
+
+  suggested_fields:
+    - "name"
+    - "slug"
+    - "primaryKeyword"
+    - "secondaryKeywords"
+    - "title"
+    - "description"
+    - "ogImage"
+    - "shortDescription"
+    - "relatedServices"
+
+  important:
+    - >
+      Non duplicare manualmente metadata in 19 componenti se è possibile
+      gestirli centralmente.
+    - >
+      Non cambiare il copy visibile solo per centralizzare i dati.
+
+seo_data_model:
+  service:
+    required:
+      name: "string"
+      slug: "string"
+      primaryKeyword: "string"
+      title: "string"
+      description: "string"
+
+    optional:
+      - "secondaryKeywords"
+      - "ogImage"
+      - "relatedServices"
+
+content_rules:
+  preserve_copy: true
+
+  do_not:
+    - "Non aggiungere paragrafi SEO artificiali."
+    - "Non aggiungere FAQ solo per schema."
+    - "Non creare testo nascosto."
+    - "Non ripetere keyword."
+    - "Non cambiare CTA esistenti."
+
+  if_content_gap:
+    instruction: >
+      Se una pagina servizio è troppo povera per essere realmente utile,
+      segnala il problema nel report finale e suggerisci quali informazioni
+      potrebbero essere aggiunte in futuro. Non aggiungere automaticamente
+      testo SEO generico.
+
+faq:
+  rule: >
+    Non creare FAQ solamente per ottenere rich results.
+    Aggiungerle esclusivamente se esistono domande reali e risposte utili
+    coerenti con il servizio.
+
+schema_validation:
+  requirements:
+    - "JSON valido."
+    - "Schema.org valido."
+    - "Nessun campo inventato."
+    - "URL assoluti."
+    - "Nomi coerenti con il contenuto."
+    - "Provider coerente."
+
+quality_control:
+  before_finish:
+    run:
+      - "npm run lint"
+      - "npm run build"
+
+  if_scripts_differ:
+    instruction: >
+      Utilizza gli script realmente presenti nel package.json.
+      Non inventare comandi.
+
+  must_verify:
+    - "Build successful."
+    - "No TypeScript errors."
+    - "No ESLint errors."
+    - "No broken imports."
+    - "No broken routes."
+    - "No missing service slugs."
+    - "No duplicate metadata."
+    - "No invalid JSON-LD."
+    - "Sitemap generation successful."
+    - "Robots generation successful."
+
+seo_audit_report:
+  required: true
+
+  final_report:
+    sections:
+      - "Summary"
+      - "Files modified"
+      - "SEO improvements"
+      - "Metadata improvements"
+      - "Service pages"
+      - "Internal linking"
+      - "Structured data"
+      - "Sitemap"
+      - "Robots"
+      - "Canonical"
+      - "Open Graph"
+      - "Image SEO"
+      - "Accessibility"
+      - "Performance"
+      - "Potential remaining issues"
+      - "Changes requiring manual action"
+      - "Recommended Google Search Console actions"
+
+  include_table:
+    columns:
+      - "Page"
+      - "URL"
+      - "Primary keyword"
+      - "Title"
+      - "Meta description"
+      - "Canonical"
+      - "Schema"
+      - "Indexable"
+      - "Internal links"
+
+  important:
+    - >
+      Indica esplicitamente qualsiasi modifica al testo visibile che hai effettuato.
+    - >
+      Se non hai modificato testi visibili, dichiaralo esplicitamente.
+    - >
+      Indica eventuali problemi che non possono essere risolti dal codice.
+    - >
+      Indica eventuali configurazioni necessarie su Vercel.
+    - >
+      Indica eventuali configurazioni necessarie su Google Search Console.
+    - >
+      Indica eventuali configurazioni necessarie su Google Business Profile.
+
+implementation_order:
+  phase_1:
+    name: "Repository audit"
+    actions:
+      - "Analizza struttura."
+      - "Analizza router."
+      - "Analizza package.json."
+      - "Analizza tutte le route."
+      - "Analizza metadata."
+      - "Analizza service data."
+
+  phase_2:
+    name: "Technical SEO foundation"
+    actions:
+      - "metadataBase"
+      - "canonical"
+      - "robots"
+      - "sitemap"
+      - "Open Graph"
+      - "Twitter/X"
+      - "favicon/manifest checks"
+
+  phase_3:
+    name: "Service SEO architecture"
+    actions:
+      - "Service metadata model"
+      - "generateMetadata"
+      - "unique title"
+      - "unique description"
+      - "canonical"
+      - "service JSON-LD"
+      - "breadcrumbs"
+      - "related services"
+
+  phase_4:
+    name: "Semantic SEO"
+    actions:
+      - "H1 audit"
+      - "H2/H3 hierarchy"
+      - "semantic HTML"
+      - "crawlable links"
+      - "alt attributes"
+
+  phase_5:
+    name: "Performance"
+    actions:
+      - "image optimization"
+      - "font optimization"
+      - "client component audit"
+      - "JS audit"
+      - "Core Web Vitals improvements"
+
+  phase_6:
+    name: "Validation"
+    actions:
+      - "lint"
+      - "typecheck"
+      - "build"
+      - "route verification"
+      - "metadata verification"
+      - "sitemap verification"
+      - "robots verification"
+
+  phase_7:
+    name: "Final report"
+    actions:
+      - "Generate complete SEO report."
+      - "List modified files."
+      - "List remaining manual actions."
+
+absolute_priorities:
+  priority_1:
+    - "Do not break the website."
+
+  priority_2:
+    - "Do not change the existing visual identity."
+
+  priority_3:
+    - "Do not rewrite existing marketing copy."
+
+  priority_4:
+    - "Make every important page technically indexable."
+
+  priority_5:
+    - "Make every service page uniquely understandable to Google."
+
+  priority_6:
+    - "Build strong internal linking between services."
+
+  priority_7:
+    - "Use correct structured data."
+
+  priority_8:
+    - "Optimize performance without destroying visual effects."
+
+  priority_9:
+    - "Validate everything before completion."
+
+final_instruction:
+  text: >
+    Non limitarti a inserire meta tag.
+    Ragiona sull'intero sito come su un'architettura SEO.
+
+    L'obiettivo è fare in modo che Google possa comprendere chiaramente:
+    1. chi è Comodigitale,
+    2. dove opera,
+    3. quali servizi offre,
+    4. per quali tipologie di attività offre tali servizi,
+    5. quali problemi risolve,
+    6. quali pagine sono più importanti,
+    7. quali pagine sono correlate tra loro.
+
+    Ogni modifica deve essere tecnicamente corretta, naturale per l'utente
+    e coerente con Next.js.
+
+    NON ottimizzare il sito per un algoritmo immaginario.
+    Ottimizzalo per utenti reali e per una corretta comprensione da parte
+    dei motori di ricerca.
+
+    Prima analizza.
+    Poi pianifica.
+    Poi implementa.
+    Infine verifica e produci un report dettagliato.
+Una cosa importante prima di lanciarlo in Cursor
+Io non farei eseguire subito tutto in modalità "agent" senza controllo.
+Gli darei prima questo prompt e gli direi di fare la fase di analisi senza modificare file. Dopo che ti restituisce l'audit, puoi farmelo vedere e possiamo controllare insieme se sta interpretando correttamente la struttura del tuo progetto.
+Poi gli fai eseguire l'implementazione.
+Il motivo è semplice: il prompt contiene una strategia SEO molto ampia, ma Cursor conosce il codice reale del tuo progetto, mentre io conosco la strategia che vogliamo applicare. Il passaggio migliore è quindi:
+Cursor → audit del codice → noi controlliamo → Cursor implementa.
+E soprattutto, per le 19 pagine /servizi/[slug], non mi affiderei a metadata generati genericamente. Voglio che ogni servizio abbia un'intenzione di ricerca precisa, perché è proprio lì che puoi costruire il vantaggio competitivo SEO di Comodigitale.

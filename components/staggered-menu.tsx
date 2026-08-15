@@ -453,18 +453,17 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           ))}
         </div>
 
-        <header
+        <div
           className={`staggered-menu-header pointer-events-none absolute top-0 left-0 z-20 flex items-center bg-transparent ${
             showLogo ? "w-full justify-between p-[2em]" : "relative inset-auto w-auto justify-end p-0"
           }`}
-          aria-label="Main navigation header"
         >
           {showLogo ? (
             <div className="sm-logo pointer-events-auto flex items-center select-none" aria-label="Logo">
               {/* eslint-disable-next-line @next/next/no-img-element -- React Bits menu logo */}
               <img
                 src={logoUrl}
-                alt="Logo"
+                alt="comodigitale"
                 className="sm-logo-img block h-8 w-auto object-contain"
                 draggable={false}
                 width={110}
@@ -515,7 +514,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
               />
             </span>
           </button>
-        </header>
+        </div>
 
         <aside
           id="staggered-menu-panel"
@@ -524,10 +523,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
           style={{ WebkitBackdropFilter: "blur(12px)" }}
           aria-hidden={!open}
         >
-          <div className="sm-panel-inner flex flex-1 flex-col gap-5">
+          <nav className="sm-panel-inner flex flex-1 flex-col gap-5" aria-label="Navigazione">
             <ul
               className="sm-panel-list m-0 flex list-none flex-col gap-2 p-0"
-              role="list"
               data-numbering={displayItemNumbering || undefined}
             >
               {items && items.length ? (
@@ -560,9 +558,9 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             {displaySocials && socialItems && socialItems.length > 0 && (
               <div className="sm-socials mt-auto flex flex-col gap-3 pt-8" aria-label="Contatti">
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="sm-socials-title m-0 text-base font-medium">
+                  <p className="sm-socials-title m-0 text-base font-medium">
                     Contatti
-                  </h3>
+                  </p>
                   <button
                     type="button"
                     onClick={toggleTheme}
@@ -598,7 +596,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 </ul>
               </div>
             )}
-          </div>
+          </nav>
         </aside>
       </div>
 

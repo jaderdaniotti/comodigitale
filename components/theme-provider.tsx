@@ -6,7 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 
@@ -29,42 +29,63 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 const STORAGE_KEY = "comodigitale-theme";
+const THEME_EVENT = "comodigitale:theme";
 
 function normalizeTheme(value: string | null): Theme {
   if (value === "light") return "light";
-  // migrate legacy "accent" → dark
   return "dark";
 }
 
+function subscribeTheme(onStoreChange: () => void) {
+  window.addEventListener("storage", onStoreChange);
+  window.addEventListener(THEME_EVENT, onStoreChange);
+  return () => {
+    window.removeEventListener("storage", onStoreChange);
+    window.removeEventListener(THEME_EVENT, onStoreChange);
+  };
+}
+
+function getThemeSnapshot(): Theme {
+  return normalizeTheme(window.localStorage.getItem(STORAGE_KEY));
+}
+
+function getThemeServerSnapshot(): Theme {
+  return "dark";
+}
+
+function subscribeMounted() {
+  return () => {};
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
-  const [mounted, setMounted] = useState(false);
+  const theme = useSyncExternalStore(
+    subscribeTheme,
+    getThemeSnapshot,
+    getThemeServerSnapshot,
+  );
+  const mounted = useSyncExternalStore(subscribeMounted, () => true, () => false);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    const initial = normalizeTheme(stored);
-    document.documentElement.setAttribute("data-theme", initial);
-    setThemeState(initial);
-    if (stored === "accent") {
+    if (window.localStorage.getItem(STORAGE_KEY) === "accent") {
       window.localStorage.setItem(STORAGE_KEY, "dark");
+      window.dispatchEvent(new Event(THEME_EVENT));
     }
-    setMounted(true);
-  }, []);
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   const setTheme = useCallback((next: Theme) => {
-    setThemeState(next);
-    document.documentElement.setAttribute("data-theme", next);
     window.localStorage.setItem(STORAGE_KEY, next);
+    document.documentElement.setAttribute("data-theme", next);
+    window.dispatchEvent(new Event(THEME_EVENT));
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setThemeState((current) => {
-      const next: Theme = current === "light" ? "dark" : "light";
-      document.documentElement.setAttribute("data-theme", next);
-      window.localStorage.setItem(STORAGE_KEY, next);
-      return next;
-    });
-  }, []);
+    const next: Theme =
+      normalizeTheme(window.localStorage.getItem(STORAGE_KEY)) === "light"
+        ? "dark"
+        : "light";
+    setTheme(next);
+  }, [setTheme]);
 
   const value = useMemo(
     () => ({
