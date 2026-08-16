@@ -1,0 +1,493 @@
+Sto sviluppando un sito web professionale in Next.js per un'agenzia digitale chiamata Comodigitale.
+
+Ho già una struttura SEO iniziale composta da:
+
+- lib/service-pages.ts
+  Contiene tutte le pagine servizio con:
+  - slug
+  - nome servizio
+  - hero
+  - descrizioni
+  - problemi risolti
+  - funzionalità
+  - CTA
+
+- lib/service-seo.ts
+  Contiene:
+  - primaryKeyword
+  - title SEO
+  - meta description
+  - servizi correlati
+
+- lib/json-ld.ts
+  Contiene:
+  - Organization schema
+  - Service schema
+  - Breadcrumb schema
+
+
+Voglio trasformare il sito in una struttura SEO avanzata, ottimizzata per il posizionamento organico su Google.
+
+Analizza l'attuale struttura e apporta miglioramenti seguendo questi obiettivi.
+
+
+==========================
+1. ARCHITETTURA SEO TECNICA
+==========================
+
+Implementa una struttura SEO professionale per Next.js:
+
+- metadata dinamici per ogni pagina servizio
+- canonical URL
+- Open Graph completo
+- Twitter Card
+- sitemap.xml dinamica
+- robots.txt ottimizzato
+- gestione corretta degli URL
+- breadcrumbs SEO
+- miglioramento Core Web Vitals
+
+
+Ogni pagina servizio deve avere:
+
+Title SEO:
+massimo 60 caratteri
+
+Meta description:
+140-160 caratteri
+
+Slug SEO-friendly
+
+Canonical automatica
+
+
+==========================
+2. OTTIMIZZAZIONE KEYWORD
+==========================
+
+Analizza tutte le keyword presenti in service-seo.ts.
+
+Per ogni servizio crea una strategia keyword composta da:
+
+- keyword principale
+- keyword secondarie
+- keyword correlate
+- search intent
+- eventuali keyword locali
+
+
+Esempio:
+
+Attuale:
+
+"sito web ristorante"
+
+
+Migliora creando:
+
+Keyword primaria:
+"sito web ristorante"
+
+Keyword secondarie:
+- sito ristorante professionale
+- menù digitale ristorante
+- prenotazione tavoli online
+- sito per ristoranti
+
+
+Keyword locali:
+- creazione siti web ristoranti Lombardia
+- sito web ristorante Milano
+- web agency ristorazione
+
+
+Non modificare solo il testo:
+crea una vera struttura semantica.
+
+
+==========================
+3. CREAZIONE CLUSTER SEO
+==========================
+
+Organizza i servizi in cluster.
+
+
+Esempio:
+
+
+CLUSTER:
+Siti web attività locali
+
+
+Pagine:
+
+/servizi/ristoranti
+/servizi/artigiani
+/servizi/palestre
+/servizi/bb-case-vacanza
+
+
+CLUSTER:
+
+Digitalizzazione aziende
+
+
+Pagine:
+
+/servizi/digitalizzazione
+/servizi/preventivi-online
+/servizi/prenotazioni
+
+
+Crea collegamenti interni strategici.
+
+
+==========================
+4. INTERNAL LINKING
+==========================
+
+Migliora relatedServices.
+
+
+Non scegliere collegamenti casuali.
+
+Ogni pagina deve avere:
+
+- 3 link verso servizi correlati
+- link verso servizi più redditizi
+- link verso pagine informative
+
+
+Esempio:
+
+Pagina:
+
+artigiani
+
+
+Collegamenti:
+
+preventivi-online
+digitalizzazione
+landing-ads
+
+
+Obiettivo:
+
+aumentare permanenza utente e conversioni.
+
+
+==========================
+5. DATI STRUTTURATI JSON-LD
+==========================
+
+Potenzia lib/json-ld.ts.
+
+
+Implementa:
+
+
+Organization schema:
+
+aggiungere:
+
+- areaServed
+- serviceType
+- sameAs
+- contactPoint
+
+
+Service schema:
+
+aggiungere:
+
+- provider
+- areaServed
+- audience
+- serviceType
+
+
+BreadcrumbList:
+
+
+migliorare struttura.
+
+
+Aggiungere inoltre:
+
+
+FAQPage schema
+
+
+Per ogni servizio prevedere:
+
+
+faq:
+
+[
+{
+question:"",
+answer:""
+}
+]
+
+
+Implementare automaticamente JSON-LD FAQ.
+
+
+==========================
+6. CONTENUTI SEO DELLE PAGINE
+==========================
+
+Ogni pagina servizio deve diventare una landing SEO completa.
+
+
+La struttura ideale:
+
+
+H1:
+
+keyword principale
+
+
+Hero:
+
+
+problema del cliente
+
+
+Soluzione:
+
+
+come Comodigitale risolve il problema
+
+
+Sezione:
+
+Per chi è pensato
+
+
+Esempi:
+
+
+"Pensato per:"
+- ristoranti
+- pizzerie
+- agriturismi
+
+
+Sezione:
+
+Funzionalità
+
+
+Sezione:
+
+Come funziona
+
+
+FAQ
+
+
+CTA finale
+
+
+Servizi correlati
+
+
+
+Ogni pagina deve avere almeno:
+
+800-1200 parole ottimizzate SEO.
+
+
+==========================
+7. PAGINE LONG TAIL
+==========================
+
+Analizza i servizi principali e crea pagine verticali più specifiche.
+
+
+Esempio:
+
+
+Da:
+
+/servizi/artigiani
+
+
+creare:
+
+
+/siti-web-falegnami
+
+/siti-web-idraulici
+
+/siti-web-elettricisti
+
+
+Da:
+
+/servizi/ristoranti
+
+
+creare:
+
+
+/siti-web-pizzerie
+
+/siti-web-agriturismi
+
+/siti-web-bar
+
+
+Obiettivo:
+
+intercettare ricerche molto specifiche.
+
+
+==========================
+8. SEO LOCALE
+==========================
+
+Implementa una strategia locale.
+
+
+Creare:
+
+
+/zone-servite
+
+
+con:
+
+- Lombardia
+- Milano
+- Bergamo
+- Lecco
+- Monza
+- Como
+
+
+Ogni pagina locale deve contenere:
+
+- servizi offerti
+- aziende target
+- vantaggi
+- CTA
+
+
+Aggiungere LocalBusiness schema.
+
+
+==========================
+9. BLOG SEO
+==========================
+
+Creare struttura blog.
+
+
+Categorie:
+
+
+- Siti web
+- Ecommerce
+- Digitalizzazione
+- Automazioni
+- SEO
+
+
+Creare articoli pillar:
+
+
+"Esempio:
+
+Quanto costa creare un sito web aziendale nel 2026"
+
+
+"Come digitalizzare una piccola impresa"
+
+
+"Perché un artigiano dovrebbe avere un sito web"
+
+
+Ogni articolo deve collegarsi ai servizi.
+
+
+==========================
+10. OTTIMIZZAZIONE TECNICA
+==========================
+
+Controlla:
+
+
+- immagini WebP
+- alt text immagini
+- lazy loading
+- font
+- performance
+- bundle Next.js
+- caching
+- compressione
+- mobile first
+
+
+Obiettivo:
+
+ottenere ottimi risultati Lighthouse.
+
+
+==========================
+11. CONVERSIONE CLIENTE
+==========================
+
+SEO non deve solo portare visite.
+
+
+Ottimizza:
+
+
+CTA
+
+
+Form contatti
+
+
+WhatsApp
+
+
+Richiesta preventivo
+
+
+Inserire elementi di fiducia:
+
+
+- portfolio
+- casi studio
+- recensioni
+- risultati ottenuti
+
+
+==========================
+OUTPUT RICHIESTO
+==========================
+
+
+Non limitarti a spiegare.
+
+
+Modifica direttamente la struttura.
+
+
+Fornisci:
+
+1. File aggiornati completi
+2. Nuovi file necessari
+3. Modifiche TypeScript
+4. Nuove interfacce
+5. Nuove funzioni
+6. Struttura cartelle finale
+7. Checklist SEO prima della pubblicazione
+
+
+Il risultato deve essere un sito Next.js pronto per competere su Google nel settore creazione siti web e digitalizzazione aziende.

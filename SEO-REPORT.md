@@ -2,7 +2,8 @@
 
 **Data:** 15 agosto 2026  
 **Stack:** Next.js 16.3 App Router  
-**Dominio canonico:** `https://comodigitale.com`  
+**Dominio canonico:** `https://www.comodigitale.com`  
+**Nota indicizzazione (16 ago 2026):** in produzione Vercel reindirizza l’apex `comodigitale.com` → `www`. Canonical, sitemap, OG e robots devono usare `www` per evitare conflitto con il redirect 308. 
 **Stato validazione:** `npm run lint` (0 errori) · `tsc --noEmit` · `next build` OK (37 route, 19 servizi SSG)
 
 ---

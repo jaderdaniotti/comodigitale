@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 
-/** Canonical production domain. Never use comodigitale.vercel.app. */
-export const SITE_URL = "https://comodigitale.com";
+/**
+ * Canonical production domain = host that serves 200 (no redirect).
+ * Live Vercel config redirects apex → www, so canonicals must use www.
+ * Never use comodigitale.vercel.app.
+ */
+export const SITE_URL = "https://www.comodigitale.com";
 
 export const OG_SITE_NAME = "Comodigitale";
 export const OG_LOCALE = "it_IT";
