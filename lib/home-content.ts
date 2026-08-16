@@ -6,11 +6,6 @@ export const site = {
   whatsapp: "393513152008",
   phoneDisplay: "+39 351 315 2008",
   year: 2026,
-  socials: {
-    instagram: "https://www.instagram.com/comodigitale/",
-    linkedin: "https://www.linkedin.com/company/comodigitale/",
-    github: "https://github.com/comodigitale",
-  },
 } as const;
 
 export const navItems = [

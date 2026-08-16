@@ -13,11 +13,6 @@ export function organizationNode() {
     logo: absoluteUrl("/img/logo/logonerosubianco.svg"),
     email: site.email,
     telephone: site.phoneDisplay,
-    sameAs: [
-      site.socials.instagram,
-      site.socials.linkedin,
-      site.socials.github,
-    ],
   };
 }
 

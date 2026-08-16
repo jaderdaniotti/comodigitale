@@ -73,7 +73,6 @@ export const contactDirect = {
   emailLabel: "Email",
   whatsappLabel: "WhatsApp",
   whatsappCta: "Scrivici su WhatsApp",
-  socialLabel: "Social",
   whereLabel: "Dove siamo",
 } as const;
 

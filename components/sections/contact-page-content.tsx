@@ -93,7 +93,7 @@ export function ContactPageContent() {
               {contactDirect.title}
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
                 {contactDirect.emailLabel}
@@ -117,39 +117,6 @@ export function ContactPageContent() {
               >
                 {contactDirect.whatsappCta} →
               </a>
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                {contactDirect.socialLabel}
-              </p>
-              <p className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[clamp(1.05rem,2vw,1.2rem)]">
-                <a
-                  href={site.socials.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition hover:opacity-70"
-                >
-                  Instagram
-                </a>
-                <span className="text-muted">·</span>
-                <a
-                  href={site.socials.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition hover:opacity-70"
-                >
-                  LinkedIn
-                </a>
-                <span className="text-muted">·</span>
-                <a
-                  href={site.socials.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition hover:opacity-70"
-                >
-                  GitHub
-                </a>
-              </p>
             </div>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
