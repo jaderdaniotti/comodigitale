@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Unbounded } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { CookieConsent } from "@/components/cookie-consent";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -94,6 +95,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <WhatsAppFab />
           </div>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
