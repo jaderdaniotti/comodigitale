@@ -12,13 +12,21 @@ import {
 } from "@/lib/contact-page";
 import { site } from "@/lib/home-content";
 
-export function ContactPageContent() {
+export function ContactPageContent({
+  locale,
+}: {
+  locale?: {
+    eyebrow?: string;
+    subtitle?: string;
+    locationLine?: string;
+  };
+}) {
   return (
     <>
       <section className="bg-hero pt-16 pb-20 text-foreground lg:pt-24 lg:pb-28">
         <div className="page-shell">
           <Reveal>
-            <SectionLabel>{contactPage.eyebrow}</SectionLabel>
+            <SectionLabel>{locale?.eyebrow ?? contactPage.eyebrow}</SectionLabel>
           </Reveal>
           <h1 className="font-display mt-0 max-w-4xl text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight">
             <SplitText
@@ -52,7 +60,7 @@ export function ContactPageContent() {
           </h1>
           <Reveal>
             <p className="mt-8 max-w-2xl text-[clamp(1.05rem,2vw,1.25rem)] leading-relaxed text-muted">
-              {contactPage.subtitle}
+              {locale?.subtitle ?? contactPage.subtitle}
             </p>
             <p className="font-display mt-10 text-[clamp(0.95rem,2vw,1.15rem)] font-semibold tracking-[0.14em] text-foreground">
               {contactPage.stack.join(" · ")}
@@ -123,7 +131,7 @@ export function ContactPageContent() {
                 {contactDirect.whereLabel}
               </p>
               <p className="font-display mt-3 text-[clamp(1.1rem,2vw,1.35rem)] font-semibold tracking-tight">
-                {site.location}
+                {locale?.locationLine ?? site.location}
               </p>
             </div>
           </div>

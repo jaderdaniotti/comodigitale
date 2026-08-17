@@ -38,14 +38,24 @@ function Mark({ value, featured = false }: { value: CompareMark; featured?: bool
   );
 }
 
-export function WhyUsPageContent() {
+export function WhyUsPageContent({
+  locale,
+}: {
+  locale?: {
+    eyebrow?: string;
+    extra?: string;
+    contactHref?: string;
+    ctaTitle?: string;
+    ctaBody?: string;
+  };
+}) {
   return (
     <>
       <section className="relative overflow-x-clip bg-hero pt-16 pb-20 text-foreground lg:pt-24 lg:pb-28">
         <div className="page-shell relative z-10 flex flex-col gap-10 lg:block">
           <div className="w-full lg:max-w-[min(100%,calc(100%-min(48vw,20rem)-1rem))]">
             <Reveal>
-              <SectionLabel>{whyUsPage.eyebrow}</SectionLabel>
+              <SectionLabel>{locale?.eyebrow ?? whyUsPage.eyebrow}</SectionLabel>
             </Reveal>
             <h1 className="font-display mt-0 text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight">
               <SplitText
@@ -70,6 +80,11 @@ export function WhyUsPageContent() {
               <p className="mt-6 max-w-2xl text-[clamp(1.05rem,2vw,1.2rem)] leading-relaxed text-muted">
                 {whyUsPage.body}
               </p>
+              {locale?.extra ? (
+                <p className="mt-4 max-w-2xl text-[clamp(1.05rem,2vw,1.2rem)] leading-relaxed text-muted">
+                  {locale.extra}
+                </p>
+              ) : null}
             </Reveal>
           </div>
           <div className="pointer-events-none relative mx-auto aspect-square w-[min(70vw,18rem)] overflow-hidden lg:absolute lg:inset-y-0 lg:right-[clamp(1.25rem,3vw,3rem)] lg:mx-0 lg:aspect-auto lg:w-[min(48vw,32rem)]">
@@ -260,7 +275,11 @@ export function WhyUsPageContent() {
         </div>
       </section>
 
-      <FinalCtaSection title={whyUsCta.title} body={whyUsCta.body} />
+      <FinalCtaSection
+        title={locale?.ctaTitle ?? whyUsCta.title}
+        body={locale?.ctaBody ?? whyUsCta.body}
+        href={locale?.contactHref ?? "/contatti"}
+      />
     </>
   );
 }

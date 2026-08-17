@@ -1,12 +1,20 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo";
+import { getComuniSitemapChunkCount } from "@/lib/sitemap-entries";
 
 export default function robots(): MetadataRoute.Robots {
+  const comuniSitemaps = Array.from(
+    { length: getComuniSitemapChunkCount() },
+    (_, id) => absoluteUrl(`/comuni/sitemap/${id}.xml`),
+  );
+
   return {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: "/api/",
     },
-    sitemap: absoluteUrl("/sitemap.xml"),
+    host: "https://www.comodigitale.com",
+    sitemap: [absoluteUrl("/sitemap.xml"), ...comuniSitemaps],
   };
 }

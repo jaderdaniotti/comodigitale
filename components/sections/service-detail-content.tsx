@@ -8,9 +8,30 @@ import type { ServicePage } from "@/lib/service-pages";
 import { getRelatedServicePages } from "@/lib/service-seo";
 import { getServiceEmojiSrc } from "@/lib/services-content";
 
-export function ServiceDetailContent({ page }: { page: ServicePage }) {
+export function ServiceDetailContent({
+  page,
+  locale,
+}: {
+  page: ServicePage;
+  locale?: {
+    breadcrumbs?: Array<{ href: string; label: string }>;
+    h1?: string;
+    localLead?: string;
+    contactHref?: string;
+    relatedBasePath?: string;
+    ctaTitle?: string;
+    ctaBody?: string;
+  };
+}) {
   const emojiSrc = getServiceEmojiSrc(page.slug);
   const relatedPages = getRelatedServicePages(page.slug);
+  const contactHref = locale?.contactHref ?? "/contatti";
+  const relatedBasePath = locale?.relatedBasePath ?? "/servizi";
+  const crumbs = locale?.breadcrumbs ?? [
+    { href: "/", label: "Home" },
+    { href: "/servizi", label: "Servizi" },
+    { href: `/servizi/${page.slug}`, label: page.name },
+  ];
 
   return (
     <>
@@ -19,30 +40,27 @@ export function ServiceDetailContent({ page }: { page: ServicePage }) {
           <Reveal>
             <nav aria-label="Percorso" className="mb-6">
               <ol className="flex flex-wrap items-center text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                <li>
-                  <Link href="/" className="transition hover:text-foreground">
-                    Home
-                  </Link>
-                </li>
-                <li className="flex items-center">
-                  <span className="mx-2 text-border" aria-hidden="true">
-                    /
-                  </span>
-                  <Link href="/servizi" className="transition hover:text-foreground">
-                    Servizi
-                  </Link>
-                </li>
-                <li className="flex items-center">
-                  <span className="mx-2 text-border" aria-hidden="true">
-                    /
-                  </span>
-                  <span aria-current="page">{page.name}</span>
-                </li>
+                {crumbs.map((crumb, index) => (
+                  <li key={crumb.href} className={index === 0 ? undefined : "flex items-center"}>
+                    {index > 0 ? (
+                      <span className="mx-2 text-border" aria-hidden="true">
+                        /
+                      </span>
+                    ) : null}
+                    {index === crumbs.length - 1 ? (
+                      <span aria-current="page">{crumb.label}</span>
+                    ) : (
+                      <Link href={crumb.href} className="transition hover:text-foreground">
+                        {crumb.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
               </ol>
             </nav>
             <SectionLabel>{page.name}</SectionLabel>
             <h1 className="font-display max-w-4xl text-[clamp(2.2rem,5.5vw,4.25rem)] font-semibold leading-[1.04] tracking-tight">
-              {page.heroTitle}
+              {locale?.h1 ?? page.heroTitle}
               {emojiSrc ? (
                 // eslint-disable-next-line @next/next/no-img-element -- emoji SVG from public folder
                 <img
@@ -56,8 +74,13 @@ export function ServiceDetailContent({ page }: { page: ServicePage }) {
             <p className="mt-8 max-w-2xl text-[clamp(1.05rem,2vw,1.25rem)] leading-relaxed text-muted">
               {page.heroBody}
             </p>
+            {locale?.localLead ? (
+              <p className="mt-5 max-w-2xl text-[clamp(1.05rem,2vw,1.2rem)] leading-relaxed text-muted">
+                {locale.localLead}
+              </p>
+            ) : null}
             <div className="mt-10">
-              <Button href="/contatti">{page.heroCta}</Button>
+              <Button href={contactHref}>{page.heroCta}</Button>
             </div>
           </Reveal>
         </div>
@@ -217,7 +240,7 @@ export function ServiceDetailContent({ page }: { page: ServicePage }) {
               {relatedPages.map((related) => (
                 <li key={related.slug}>
                   <Link
-                    href={`/servizi/${related.slug}`}
+                    href={`${relatedBasePath}/${related.slug}`}
                     className="inline-flex rounded-full border border-border px-4 py-2 text-sm text-muted transition hover:border-foreground/40 hover:text-foreground"
                   >
                     {related.name}
@@ -229,7 +252,11 @@ export function ServiceDetailContent({ page }: { page: ServicePage }) {
         </section>
       ) : null}
 
-      <FinalCtaSection title={page.ctaTitle} body={page.ctaBody} />
+      <FinalCtaSection
+        title={locale?.ctaTitle ?? page.ctaTitle}
+        body={locale?.ctaBody ?? page.ctaBody}
+        href={contactHref}
+      />
     </>
   );
 }

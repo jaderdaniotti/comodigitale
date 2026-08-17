@@ -118,16 +118,29 @@ function PhaseVisual({ number }: { number: string }) {
   return null;
 }
 
-export function ProcessPageContent() {
+export function ProcessPageContent({
+  locale,
+}: {
+  locale?: {
+    eyebrow?: string;
+    extra?: string;
+    serviziHref?: string;
+    contactHref?: string;
+    ctaTitle?: string;
+    ctaBody?: string;
+  };
+}) {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const serviziHref = locale?.serviziHref ?? "/servizi";
+  const contactHref = locale?.contactHref ?? "/contatti";
 
   return (
     <>
       <section className="bg-hero pt-16 pb-20 text-foreground lg:pt-24 lg:pb-28">
         <div className="page-shell">
           <Reveal>
-            <SectionLabel>{processPage.eyebrow}</SectionLabel>
+            <SectionLabel>{locale?.eyebrow ?? processPage.eyebrow}</SectionLabel>
           </Reveal>
           <h1 className="font-display mt-0 max-w-5xl text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight">
             <SplitText
@@ -152,6 +165,11 @@ export function ProcessPageContent() {
             <p className="mt-6 max-w-2xl text-[clamp(1.05rem,2vw,1.2rem)] leading-relaxed text-muted">
               {processPage.body}
             </p>
+            {locale?.extra ? (
+              <p className="mt-4 max-w-2xl text-[clamp(1.05rem,2vw,1.2rem)] leading-relaxed text-muted">
+                {locale.extra}
+              </p>
+            ) : null}
             <p className="font-display mt-10 text-[clamp(0.85rem,1.8vw,1.05rem)] font-semibold tracking-[0.14em] text-foreground">
               {processPage.stack.join(" · ")}
             </p>
@@ -249,7 +267,7 @@ export function ProcessPageContent() {
               {processFlexible.types.map((type, index) => (
                 <span key={type.label}>
                   {index > 0 ? <span className="text-muted"> → </span> : null}
-                  <Link href={type.href} className="transition hover:opacity-70">
+                  <Link href={serviziHref} className="transition hover:opacity-70">
                     {type.label}
                   </Link>
                 </span>
@@ -261,9 +279,10 @@ export function ProcessPageContent() {
 
       <div className="relative z-20">
         <FinalCtaSection
-          title={processCta.title}
-          body={processCta.body}
+          title={locale?.ctaTitle ?? processCta.title}
+          body={locale?.ctaBody ?? processCta.body}
           cta={processCta.cta}
+          href={contactHref}
         />
       </div>
     </>

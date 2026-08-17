@@ -1,14 +1,4 @@
-type JsonLdValue =
-  | string
-  | number
-  | boolean
-  | null
-  | JsonLdValue[]
-  | { [key: string]: JsonLdValue };
-
-type JsonLdObject = { [key: string]: JsonLdValue };
-
-export function JsonLd({ data }: { data: JsonLdObject }) {
+export function JsonLd({ data }: { data: object }) {
   return (
     <script
       type="application/ld+json"

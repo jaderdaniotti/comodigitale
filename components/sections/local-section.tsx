@@ -1,9 +1,27 @@
+import Link from "next/link";
 import { BrandLogo } from "@/components/brand-logo";
 import { Reveal } from "@/components/reveal";
 import { SectionLabel } from "@/components/section-label";
 import { localSection } from "@/lib/home-content";
 
-export function LocalSection() {
+type LocalLink = {
+  href: string;
+  label: string;
+};
+
+export function LocalSection({
+  title = localSection.title,
+  titleLine2 = localSection.titleLine2,
+  body = localSection.body,
+  areas = localSection.areas,
+  links,
+}: {
+  title?: string;
+  titleLine2?: string;
+  body?: string;
+  areas?: readonly string[];
+  links?: readonly LocalLink[];
+}) {
   return (
     <section
       id="chi-siamo"
@@ -13,15 +31,15 @@ export function LocalSection() {
         <Reveal className="min-w-0">
           <SectionLabel>Chi siamo</SectionLabel>
           <h2 className="font-display text-[clamp(2rem,4.5vw,3rem)] font-semibold leading-[1.05] tracking-tight">
-            {localSection.title}
+            {title}
             <br />
-            {localSection.titleLine2}
+            {titleLine2}
           </h2>
           <p className="mt-6 max-w-lg leading-relaxed text-muted">
-            {localSection.body}
+            {body}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            {localSection.areas.map((area) => (
+            {[...new Set(areas)].map((area) => (
               <span
                 key={area}
                 className="rounded-full border border-border px-4 py-1.5 text-xs font-medium uppercase tracking-[0.12em] text-muted"
@@ -30,6 +48,20 @@ export function LocalSection() {
               </span>
             ))}
           </div>
+          {links && links.length > 0 ? (
+            <ul className="mt-8 flex flex-wrap gap-3">
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm font-medium underline-offset-4 transition hover:text-foreground hover:underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </Reveal>
 
         <Reveal delay={0.18}>

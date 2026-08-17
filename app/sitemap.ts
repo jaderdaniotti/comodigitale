@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { servicePages } from "@/lib/service-pages";
 import { absoluteUrl } from "@/lib/seo";
+import { COMUNI_HUB_PATH } from "@/lib/comune-paths";
 
 const staticPages: Array<{
   path: string;
@@ -12,6 +13,7 @@ const staticPages: Array<{
   { path: "/processo", changeFrequency: "monthly", priority: 0.7 },
   { path: "/perche-noi", changeFrequency: "monthly", priority: 0.7 },
   { path: "/contatti", changeFrequency: "monthly", priority: 0.8 },
+  { path: COMUNI_HUB_PATH, changeFrequency: "weekly", priority: 0.85 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

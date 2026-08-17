@@ -65,7 +65,7 @@ function MockupSlide({
   );
 }
 
-function HeroVisual() {
+export function HeroVisual() {
   const slides = heroMockups;
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);

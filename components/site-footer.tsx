@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { BrandLogo } from "@/components/brand-logo";
 import { CookieManageButton } from "@/components/cookie-consent";
-import { footerLegal, navItems, site } from "@/lib/home-content";
+import { footerLegal, footerNavItems, site } from "@/lib/home-content";
+import { getFeaturedComuni } from "@/lib/comuni";
+import { COMUNI_HUB_PATH, comuneBasePath } from "@/lib/comune-paths";
 
 export function SiteFooter() {
+  const featuredComuni = getFeaturedComuni(24);
+
   return (
     <footer className="border-t border-border bg-background py-16 text-foreground">
-      <div className="page-shell grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="page-shell grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link href="/" className="inline-flex items-center gap-3">
             <BrandLogo />
@@ -22,7 +26,7 @@ export function SiteFooter() {
             Navigazione
           </p>
           <ul className="mt-4 space-y-2">
-            {navItems.map((link) => (
+            {footerNavItems.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
@@ -61,6 +65,32 @@ export function SiteFooter() {
             </li>
           </ul>
         </div>
+
+        <nav aria-label="Zone servite">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
+            Zone servite
+          </p>
+          <ul className="mt-4 space-y-2">
+            {featuredComuni.slice(0, 8).map((comune) => (
+              <li key={comune.slug}>
+                <Link
+                  href={comuneBasePath(comune.slug)}
+                  className="text-sm transition hover:text-foreground"
+                >
+                  Siti web a {comune.nome}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <Link
+                href={COMUNI_HUB_PATH}
+                className="text-sm font-medium transition hover:text-foreground"
+              >
+                Tutti i comuni d’Italia
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
 
       <div className="page-shell mt-12 flex flex-col gap-3 border-t border-border pt-8 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">

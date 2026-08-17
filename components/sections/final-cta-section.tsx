@@ -6,10 +6,12 @@ export function FinalCtaSection({
   title,
   body,
   cta,
+  href = "/contatti",
 }: {
   title?: string;
   body?: string;
   cta?: string;
+  href?: string;
 }) {
   return (
     <section className="bg-background py-24 text-foreground lg:py-32">
@@ -22,7 +24,7 @@ export function FinalCtaSection({
             {body ?? finalCta.body}
           </p>
           <div className="mt-10">
-            <Button href="/contatti">{cta ?? "Iniziamo a parlarne"}</Button>
+            <Button href={href}>{cta ?? "Iniziamo a parlarne"}</Button>
           </div>
         </Reveal>
       </div>

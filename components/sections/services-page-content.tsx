@@ -5,19 +5,39 @@ import { SectionLabel } from "@/components/section-label";
 import SplitText from "@/components/split-text";
 import FlowingMenu from "@/components/flowing-menu";
 import { serviceIndexItems, servicesPage } from "@/lib/services-content";
+import type { MenuItemData } from "@/components/flowing-menu";
 
-export function ServicesPageContent() {
+export function ServicesPageContent({
+  locale,
+}: {
+  locale?: {
+    eyebrow?: string;
+    title?: string;
+    titleLine2?: string;
+    body?: string;
+    cta?: string;
+    contactHref?: string;
+    items?: MenuItemData[];
+  };
+}) {
+  const title = locale?.title ?? servicesPage.title;
+  const titleLine2 = locale?.titleLine2 ?? servicesPage.titleLine2;
+  const body = locale?.body ?? servicesPage.body;
+  const cta = locale?.cta ?? servicesPage.cta;
+  const contactHref = locale?.contactHref ?? "/contatti";
+  const items = locale?.items ?? [...serviceIndexItems];
+
   return (
     <>
       <section className="bg-hero pt-16 pb-20 text-foreground lg:pt-24 lg:pb-28">
         <div className="page-shell">
           <Reveal>
-            <SectionLabel>{servicesPage.eyebrow}</SectionLabel>
+            <SectionLabel>{locale?.eyebrow ?? servicesPage.eyebrow}</SectionLabel>
           </Reveal>
           <h1 className="font-display mt-0 max-w-4xl text-[clamp(2.2rem,5.5vw,4.25rem)] font-semibold leading-[1.04] tracking-tight">
             <SplitText
               tag="span"
-              text={servicesPage.title}
+              text={title}
               className="block w-full font-display text-[clamp(2.2rem,5.5vw,4.25rem)] font-semibold leading-[1.04] tracking-tight"
               delay={40}
               duration={0.6}
@@ -31,7 +51,7 @@ export function ServicesPageContent() {
             />
             <SplitText
               tag="span"
-              text={servicesPage.titleLine2}
+              text={titleLine2}
               className="block w-full font-display text-[clamp(2.2rem,5.5vw,4.25rem)] font-semibold leading-[1.04] tracking-tight"
               delay={30}
               duration={0.6}
@@ -46,10 +66,10 @@ export function ServicesPageContent() {
           </h1>
           <Reveal>
             <p className="mt-8 max-w-2xl text-[clamp(1.05rem,2vw,1.25rem)] leading-relaxed text-muted">
-              {servicesPage.body}
+              {body}
             </p>
             <div className="mt-10">
-              <Button href="/contatti">{servicesPage.cta}</Button>
+              <Button href={contactHref}>{cta}</Button>
             </div>
           </Reveal>
         </div>
@@ -64,10 +84,10 @@ export function ServicesPageContent() {
             </h2>
           </Reveal>
         </div>
-        <FlowingMenu items={[...serviceIndexItems]} speed={12} />
+        <FlowingMenu items={items} speed={12} />
       </section>
 
-      <FinalCtaSection />
+      <FinalCtaSection href={contactHref} />
     </>
   );
 }

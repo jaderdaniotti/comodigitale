@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { OpenGraphCard } from "@/lib/opengraph-card";
+import { getComuneBySlug } from "@/lib/comuni";
 import { getServicePage } from "@/lib/service-pages";
 
 export const socialImageSize = {
@@ -35,3 +36,24 @@ export async function serviceSocialImage(params: Promise<{ slug: string }>) {
     { ...socialImageSize },
   );
 }
+
+export async function comuneSocialImage(params: Promise<{ slug: string }>) {
+  const { slug } = await params;
+  const comune = getComuneBySlug(slug);
+  const title = comune ? `Siti web a ${comune.nome}` : "comodigitale";
+  const subtitle = comune
+    ? `${comune.provincia} (${comune.sigla}) · ${comune.regione}`
+    : "Siti web, e-commerce e soluzioni digitali";
+
+  return new ImageResponse(
+    (
+      <OpenGraphCard
+        eyebrow={comune ? `WEB AGENCY · ${comune.sigla}` : "WEB AGENCY · COMO"}
+        title={title}
+        subtitle={subtitle}
+      />
+    ),
+    { ...socialImageSize },
+  );
+}
+

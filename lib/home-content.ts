@@ -18,6 +18,11 @@ export const navItems = [
   { label: "Contatti", href: "/contatti" },
 ] as const;
 
+export const footerNavItems = [
+  ...navItems,
+  { label: "Comuni", href: "/comuni" },
+] as const;
+
 export const hero = {
   eyebrow: "WEB AGENCY · COMO",
   headline: "Costruiamo esperienze digitali che fanno crescere il tuo business.",
@@ -262,37 +267,103 @@ export const technologies = {
 export const testimonialsSection = {
   label: "Testimonianze",
   title: "Le parole dei nostri clienti.",
-  body: "Collaborazioni concrete, risultati misurabili e relazioni che continuano nel tempo.",
+  body: "Recensioni vere su Google: disponibilità, tempi e un sito che rappresenta chi lo chiede.",
   items: [
     {
       quote:
-        "Professionisti, disponibili e attenti ai dettagli. Hanno trasformato la nostra presenza online in uno strumento che porta contatti reali.",
-      name: "Marco R.",
-      role: "PMI · Lombardia",
+        "Jader mi ha fatto il sito per il mio negozio, persona molto disponibile, competente e che cerca di soddisfarti in qualsiasi modo.",
+      name: "Mariangela Basilico",
+      role: "Recensione Google",
     },
     {
       quote:
-        "Dal primo incontro al go-live tutto è stato chiaro. Il sito riflette davvero il nostro brand e funziona benissimo anche da mobile.",
-      name: "Elena B.",
-      role: "Hospitality · Como",
+        "Grande Jader! Super professionale e veloce, ottimo rapporto qualità prezzo! Ve lo consiglio ❤️",
+      name: "Eleonora",
+      role: "Recensione Google",
     },
     {
       quote:
-        "Volevamo un e-commerce semplice da gestire: l'abbiamo ottenuto, con un'esperienza di acquisto fluida e un supporto costante.",
-      name: "Giulia T.",
-      role: "Retail · Milano",
+        "Mi sono affidata a Jader per la realizzazione del mio sito internet e non potrei essere più soddisfatta della scelta.",
+      name: "Carlotta Conti",
+      role: "Recensione Google",
     },
     {
       quote:
-        "Non solo design: ci hanno aiutato a capire obiettivi e priorità. Oggi riceviamo richieste più qualificate.",
-      name: "Andrea P.",
-      role: "Studio professionale · Como",
+        "Ha realizzato il mio sito per noleggio di Suites in centro a Como. Nulla da dire, sito impeccabile, tempistiche ottime, sempre disponibile per qualsiasi modifica e richiesta, prezzo molto competitivo per il servizio offerto.",
+      name: "Marilena Mastaglio",
+      role: "Recensione Google",
     },
     {
       quote:
-        "Tempi rispettati, comunicazione trasparente e un risultato che ci rappresenta. Li consigliamo senza esitazione.",
-      name: "Sofia M.",
-      role: "Startup · Lombardia",
+        "Consiglio a tutti, mi ha accompagnato dall'inizio alla fine durante la partenza con la mia società di NCC.",
+      name: "Samuel Abate",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Professionista molto serio e disponibile, ha realizzato il nostro sito in poco tempo facendo attenzione ad ogni minimo dettaglio, curando il tutto come richiesto. Lo stra consiglio!",
+      name: "Letyzia Favit",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Fin dall'inizio Jader mi ha consigliato e modellato la mia idea nei minimi dettagli! Un professionista, mi ha consegnato il tutto nei tempi stabiliti! Lavoro di qualità e dettagliato in tutto! Consigliato",
+      name: "Stefania",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Lavorare con Jader è stato un vero piacere! Ha un gusto pazzesco.",
+      name: "Ugnė Norbutaitė",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Chiarezza fin dall'inizio e comunicazione facile e rapida. Jader è un professionista, mi ha creato un sito web unico! Esperto nel correggere i minimi dettagli.",
+      name: "Marco Ricci",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Veramente soddisfatta. Un risultato perfetto! Jader mi ha aiutata a creare finalmente un prodotto di qualità.",
+      name: "Lidya M",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Web Designer professionista e risultato perfetto! Tempistiche rispettate e precisione nei dettagli! Finalmente ho il mio sito web! Raccomandato se cerchi un lavoro di qualità e professionale! Grazie!",
+      name: "Damiano Sain",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Ottimo servizio, eccellente lavoro rapido e di qualità. Contatto chiaro e trasparente fin dall'inizio, lo consiglio a chiunque abbia bisogno di creare uno store online o sito web!",
+      name: "Anna",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Mi sono trovato benissimo. Ha realizzato il mio sito web in modo impeccabile: moderno, curato nei dettagli.",
+      name: "Stefano Erde",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Una persona professionale e ti sa accontentare su quello di cui hai bisogno.",
+      name: "Matteo Chelini",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Ho avuto il piacere di collaborare con Jader per la realizzazione del mio sito internet, rimanendo soddisfatta del risultato.",
+      name: "Lavinia Pezzetta",
+      role: "Recensione Google",
+    },
+    {
+      quote:
+        "Che dire, Jader è un mago del web! Ha trasformato le mie idee in un sito spettacolare, curando tutto nei minimi dettagli.",
+      name: "Daniele Nisticò",
+      role: "Recensione Google",
     },
   ],
 } as const;
@@ -312,6 +383,20 @@ export const localSection = {
   titleLine2: "Progetti digitali ovunque.",
   body: "Siamo una web agency con base a Como e lavoriamo con aziende, professionisti e realtà che vogliono costruire una presenza digitale realmente efficace.",
   areas: ["Como", "Milano", "Lombardia", "Italia"] as const,
+} as const;
+
+export const founderSection = {
+  eyebrow: "Il referente",
+  title: "Chi c’è dietro i lavori del web",
+  body: "Jader è lo sviluppatore che si occuperà del tuo progetto: un referente unico con cui condividerai il percorso di creazione digitale, dalla prima idea al sito online.",
+  name: "Jader",
+  titleRole: "Sviluppatore",
+  handle: "jaderweb",
+  status: "jaderweb.com",
+  contactText: "Visita il sito",
+  siteUrl: "https://jaderweb.com",
+  avatarLight: "/img/jader/logopurple.png",
+  avatarDark: "/img/jader/logogrigio.png",
 } as const;
 
 export const finalCta = {
