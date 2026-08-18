@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Poppins, Unbounded } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { CookieConsent } from "@/components/cookie-consent";
@@ -73,6 +74,14 @@ const scrollTopInitScript = `
 })();
 `;
 
+const clarityInitScript = `
+(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "y48mqpdut0");
+`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -96,6 +105,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </div>
         </ThemeProvider>
         <Analytics />
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {clarityInitScript}
+        </Script>
       </body>
     </html>
   );
